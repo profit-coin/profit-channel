@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript } from 'next/document';
+import { Head, Html, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
@@ -12,14 +12,12 @@ export default function Document() {
           // eslint-disable-next-line @next/next/no-sync-scripts
           <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
         }
-        <script>
-          eruda.init();
-        </script>
+        <script>eruda.init();</script>
       </Head>
       <body>
         <Main />
         <NextScript />
       </body>
     </Html>
-  );
+  )
 }
