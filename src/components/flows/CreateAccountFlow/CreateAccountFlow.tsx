@@ -1,25 +1,25 @@
-import { useEffect } from 'react';
-import styles from './CreateAccountFlow.module.scss';
-import Heading from '@/components/common/Heading/Heading';
-import Text from '@/components/common/Text/Text';
-import Button from '@/components/common/Button/Button';
+/* eslint-disable @next/next/no-img-element */
+import { useEffect } from 'react'
+import Button from '@/components/common/Button/Button'
+import Heading from '@/components/common/Heading/Heading'
+import Text from '@/components/common/Text/Text'
+import styles from './CreateAccountFlow.module.scss'
 
 interface CreateAccountFlowProps {
-  theme: 'light' | 'dark';
-  onAccountCreate: () => void;
+  theme: 'light' | 'dark'
+  onAccountCreate: () => void
 }
 
-function CreateAccountFlow ({ theme = 'light', onAccountCreate }: CreateAccountFlowProps) {
-  useEffect(() => {
-  }, []);
+function CreateAccountFlow({ theme = 'light', onAccountCreate }: CreateAccountFlowProps) {
+  useEffect(() => {}, [])
 
   const handleCreateAccount = () => {
-    onAccountCreate();
+    onAccountCreate()
   }
 
   return (
     <div className={styles.flow}>
-      <img src="/coin.png" className={styles.logo} />
+      <img src="/coin.png" className={styles.logo} alt="" />
       <Heading theme={theme} size="h1">
         Welcome to Profit Game
       </Heading>
@@ -30,7 +30,7 @@ function CreateAccountFlow ({ theme = 'light', onAccountCreate }: CreateAccountF
         Create account
       </Button>
     </div>
-  );
+  )
 }
 
-export default CreateAccountFlow;
+export default CreateAccountFlow

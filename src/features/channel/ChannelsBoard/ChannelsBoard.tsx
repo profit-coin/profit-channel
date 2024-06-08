@@ -1,7 +1,7 @@
 import Box from '@/components/common/Box/Box'
+import Heading from '@/components/common/Heading/Heading'
 import { Channel } from '../types'
 import styles from './ChannelsBoard.module.scss'
-import Heading from '@/components/common/Heading/Heading'
 
 interface ChannelsBoardProps {
   channels: Channel[]
@@ -11,7 +11,7 @@ interface ChannelsBoardProps {
 
 const CHANNELS_BOARD_SIZE = 20
 
-function ChannelsBoard ({ channels, onSelect, onAdd }: ChannelsBoardProps) {
+function ChannelsBoard({ channels, onSelect, onAdd }: ChannelsBoardProps) {
   const emptyChannels = Array.from({ length: CHANNELS_BOARD_SIZE - channels.length }, (_, i) => i)
 
   return (
@@ -40,4 +40,4 @@ function ChannelsBoard ({ channels, onSelect, onAdd }: ChannelsBoardProps) {
   )
 }
 
-export default ChannelsBoard;
+export default ChannelsBoard

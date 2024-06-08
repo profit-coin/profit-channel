@@ -5,7 +5,7 @@ import { ChannelItem } from '../../channel/ChannelItem/ChannelItem'
 import ChannelsBoard from '../../channel/ChannelsBoard/ChannelsBoard'
 import { Channel } from '../../channel/types'
 
-function GameView () {
+function GameView() {
   const channelsList = channels as Channel[]
 
   const [points, setPoints] = useState<number>(34034)
@@ -39,4 +39,4 @@ function GameView () {
   )
 }
 
-export default GameView;
+export default GameView
