@@ -21,7 +21,7 @@ export const channels = [
     id: 3,
     name: 'The Daily TON',
     field: distributeBoxes(142, fieldSize),
-    cover: '/covers/the_daily_ton.jpeg',
+    cover: '/uploads/covers/the_daily_ton.jpeg',
     isPremium: false,
   },
   {
