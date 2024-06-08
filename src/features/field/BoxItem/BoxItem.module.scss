@@ -1,0 +1,121 @@
+.box {
+  position: absolute;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  box-sizing: border-box;
+  padding: calc(var(--cell-size) / 10);
+  color: #775c18;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: calc(var(--cell-size) / 3.8);
+  text-align: center;
+
+  &::before,
+  &::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    background: #ce9911;
+    border-color: #715611;
+    border-style: solid;
+  }
+  &::before {
+    top: 0;
+    width: 3px;
+    height: 100%;
+    transform: translateY(-1.5px) skew(0, -45deg);
+    border-width: 1px 0 0 1px;
+  }
+  &::after {
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    transform: translateX(1.5px) skew(-45deg, 0);
+    border-width: 0 1px 1px 0;
+  }
+
+  &.hidden {
+    pointer-events: none;
+    animation: shake 0.5s;
+  }
+}
+
+.cap {
+  box-sizing: border-box;
+  position: absolute;
+  top: -3px;
+  left: 3px;
+  width: 100%;
+  height: 100%;
+  border: calc(var(--cell-size) / 10) solid #ffec9a;
+  background: #ffcc4a;
+  box-shadow:
+    inset 2px -2px 2px rgba(#000, 0.2),
+    inset -2px 2px 0 rgba(#e2a814, 0.9),
+    2px -2px 2px rgba(#000, 0.2);
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 33%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #d9b457;
+  }
+
+  &::after {
+    top: auto;
+    bottom: 33%;
+  }
+}
+
+.box {
+  --shake-size: 3px;
+  --shake-size-minus: -3px;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(var(--shake-size-minus));
+  }
+  20% {
+    transform: translateX(var(--shake-size));
+  }
+  10% {
+    transform: translateX(var(--shake-size-minus));
+  }
+  20% {
+    transform: translateX(var(--shake-size));
+  }
+  30% {
+    transform: translateX(var(--shake-size-minus));
+  }
+  40% {
+    transform: translateX(var(--shake-size));
+  }
+  50% {
+    transform: translateX(var(--shake-size-minus));
+  }
+  60% {
+    transform: translateX(var(--shake-size));
+  }
+  70% {
+    transform: translateX(var(--shake-size-minus));
+  }
+  80% {
+    transform: translateX(var(--shake-size));
+  }
+  90% {
+    transform: translateX(var(--shake-size-minus));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { GameView } from '@/features/game/GameView/GameView'
 
 export default function Home() {
   return (
@@ -8,7 +9,9 @@ export default function Home() {
         <meta name="description" content="Profit Channel" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <main></main>
+      <main>
+        <GameView />
+      </main>
     </>
   )
 }

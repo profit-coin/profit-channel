@@ -1,0 +1,17 @@
+.balance {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.coin {
+  width: 40px;
+}
+
+.sum {
+  font-size: 40px;
+  font-family: "Bungee Spice", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
