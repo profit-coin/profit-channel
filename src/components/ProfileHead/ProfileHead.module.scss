@@ -1,0 +1,27 @@
+.content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(47,44,170,1) 0%, rgba(89,86,255,1) 100%);
+}
+
+.name {
+  color: #fff;
+  font-weight: 400;
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+
+.username {
+  color: #fff;
+  margin-top: 0;
+  font-weight: 300;
+}
+
+.ballance {
+  color: #fff;
+  font-weight: 800;
+  font-size: 62px;
+}

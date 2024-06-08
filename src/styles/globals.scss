@@ -1,0 +1,14 @@
+@import 'variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow: hidden;
+  height: 100vh;
+  background: var(--background-color);
+}
