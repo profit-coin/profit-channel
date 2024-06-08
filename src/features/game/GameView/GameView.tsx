@@ -1,11 +1,11 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import { Balance } from '../../../components/Balance/Balance'
 import { channels } from '../../../mocks/channels'
 import { ChannelItem } from '../../channel/ChannelItem/ChannelItem'
 import { ChannelsBoard } from '../../channel/ChannelsBoard/ChannelsBoard'
 import { Channel } from '../../channel/types'
 
-export const GameView: FC = () => {
+function GameView () {
   const channelsList = channels as Channel[]
 
   const [points, setPoints] = useState<number>(34034)
@@ -38,3 +38,5 @@ export const GameView: FC = () => {
     </>
   )
 }
+
+export default GameView;

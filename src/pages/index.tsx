@@ -1,7 +1,8 @@
 // import ProfileHead from '@/components/ProfileHead/ProfileHead';
-import CreateAccountFlow from '@/components/flows/CreateAccountFlow/CreateAccountFlow';
 import {TelegramUser} from '@/data/telegram';
-import {GameView} from '@/features/game/GameView/GameView';
+import dynamic from 'next/dynamic';
+const GameView = dynamic(() => import('@/features/game/GameView/GameView'), {ssr: false});
+const CreateAccountFlow = dynamic(() => import('@/components/flows/CreateAccountFlow/CreateAccountFlow'), {ssr: false});
 import {getCookie, setCookie} from 'cookies-next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
