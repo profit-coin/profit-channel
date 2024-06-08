@@ -1,7 +1,8 @@
 import { PropsWithChildren } from 'react';
 import { Mada } from 'next/font/google';
-import Footer from '../../Footer/Footer';
 import styles from './DefaultLayout.module.scss';
+
+// import Footer from '../../Footer/Footer';
 
 const font = Mada({
   display: 'swap',
@@ -15,7 +16,6 @@ function DefaultLayout({ children }: PropsWithChildren) {
       <div className={font.className}>
         {children}
       </div>
-      <Footer />
     </div>
   );
 }

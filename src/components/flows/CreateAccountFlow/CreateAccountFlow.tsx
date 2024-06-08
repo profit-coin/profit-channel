@@ -2,14 +2,20 @@ import { useEffect } from 'react';
 import styles from './CreateAccountFlow.module.scss';
 import Heading from '@/components/common/Heading/Heading';
 import Text from '@/components/common/Text/Text';
+import Button from '@/components/common/Button/Button';
 
 interface CreateAccountFlowProps {
   theme: 'light' | 'dark';
+  onAccountCreate: () => void;
 }
 
-function CreateAccountFlow ({ theme = 'light' }: CreateAccountFlowProps) {
+function CreateAccountFlow ({ theme = 'light', onAccountCreate }: CreateAccountFlowProps) {
   useEffect(() => {
   }, []);
+
+  const handleCreateAccount = () => {
+    onAccountCreate();
+  }
 
   return (
     <div className={styles.flow}>
@@ -20,6 +26,9 @@ function CreateAccountFlow ({ theme = 'light' }: CreateAccountFlowProps) {
       <Text color="primary" size="large">
         Create an account to start playing and earning PROFIT tokens
       </Text>
+      <Button onClick={handleCreateAccount} variant="primary">
+        Create account
+      </Button>
     </div>
   );
 }

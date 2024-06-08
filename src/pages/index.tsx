@@ -1,10 +1,13 @@
-import ProfileHead from '@/components/ProfileHead/ProfileHead';
+// import ProfileHead from '@/components/ProfileHead/ProfileHead';
 import CreateAccountFlow from '@/components/flows/CreateAccountFlow/CreateAccountFlow';
 import {TelegramUser} from '@/data/telegram';
+import {GameView} from '@/features/game/GameView/GameView';
+import {getCookie, setCookie} from 'cookies-next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [isAccountCreated, setIsAccountCreated] = useState<boolean>(getCookie('isAccountCreated') === 'true');
   const [user, setUser] = useState<TelegramUser | null>(null);
 
   useEffect(() => {
@@ -19,6 +22,11 @@ export default function Home() {
     }
   }, []);
 
+  const handleAccountCreate = () => {
+    setIsAccountCreated(true);
+    setCookie('isAccountCreated', 'true');
+  };
+
   return (
     <>
       <Head>
@@ -27,11 +35,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>
+        {!isAccountCreated ? (
+          <CreateAccountFlow theme="light" onAccountCreate={handleAccountCreate} />
+        ) : null}
         {user ? (
-          <>
-            <CreateAccountFlow theme="light" />
-            <ProfileHead user={user} />
-          </>
+          <GameView />
         ) : null}
       </main>
     </>
