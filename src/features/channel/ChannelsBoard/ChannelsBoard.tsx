@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Box from '@/components/common/Box/Box'
 import Heading from '@/components/common/Heading/Heading'
 import { Channel } from '../types'
