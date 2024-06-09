@@ -9,7 +9,7 @@ function GameView() {
   const channelsList = channels as Channel[]
 
   const [points, setPoints] = useState<number>(34034)
-  const [activeChannelId, setActiveChanelId] = useState<number | null>(null)
+  const [activeChannelId, setActiveChanelId] = useState<string | null>(null)
 
   const currentChannel = channelsList.find(channel => channel.id === activeChannelId)
 
