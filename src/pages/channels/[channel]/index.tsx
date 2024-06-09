@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import ChannelLayout from '@/features/channel/ChannelLayout/ChannelLayout'
 import { Channel } from '@/features/channel/types'
 // TODO: Mock: Replace with real data
-import { channels } from '../../mocks/channels'
+import { channels } from '../../../mocks/channels'
 
 const ChannelItem = dynamic(() => import('@/features/channel/ChannelItem/ChannelItem'), {
   ssr: false,
@@ -26,11 +26,11 @@ export default function ChannelPage() {
 
   const handleBack = () => {
     // TODO: Use Telegram.WebApp.BackButton
-    window.history.back()
+    router.push('/channels')
   }
 
   const handleNextChannel = () => {
-    router.push(`/${channelData?.nextChannelId}`)
+    router.push(`/channels/${channelData?.nextChannelId}`)
   }
 
   return (
@@ -40,6 +40,7 @@ export default function ChannelPage() {
         <meta name="description" content="Profit Channel" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+
       <ChannelLayout>
         {channelData ? (
           <ChannelItem
