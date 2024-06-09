@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import ChannelLayout from '@/features/channel/ChannelLayout/ChannelLayout'
 import { Channel } from '@/features/channel/types'
 // TODO: Mock: Replace with real data
-import { channels } from '../../../mocks/channels'
+import { channels } from '@/mocks/channels'
 
 const ChannelItem = dynamic(() => import('@/features/channel/ChannelItem/ChannelItem'), {
   ssr: false,
