@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import cn from 'classnames'
 import Box from '@/components/common/Box/Box'
 import Heading from '@/components/common/Heading/Heading'
 import { Channel } from '../types'
@@ -18,12 +19,16 @@ function ChannelsBoard({ channels, onSelect, onAdd }: ChannelsBoardProps) {
   return (
     <div className={styles.board}>
       <Box mb="4">
-        <Heading size="h1">Your channels</Heading>
+        <Heading size="h1">Your favorite channels</Heading>
       </Box>
+
       <ul className={styles.list}>
         {channels.map(channel => (
           <li className={styles.item} key={channel.id}>
-            <button className={styles.chanel} onClick={() => onSelect(channel.id)}>
+            <button
+              className={cn('ghostButton', styles.chanel)}
+              onClick={() => onSelect(channel.id)}
+            >
               <img src={channel.cover} alt="" className={styles.cover} />
               {channel.isPremium && <div className={styles.crown}>👑</div>}
             </button>
@@ -31,7 +36,7 @@ function ChannelsBoard({ channels, onSelect, onAdd }: ChannelsBoardProps) {
         ))}
         {emptyChannels.map(item => (
           <li className={styles.item} key={item}>
-            <button className={styles.empty} onClick={onAdd}>
+            <button className={cn('ghostButton', styles.empty)} onClick={onAdd}>
               Add channel
             </button>
           </li>

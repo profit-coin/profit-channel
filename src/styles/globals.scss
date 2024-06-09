@@ -7,8 +7,18 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   overflow: hidden;
   height: 100vh;
   background: var(--background-color);
+}
+
+.ghostButton {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
 }

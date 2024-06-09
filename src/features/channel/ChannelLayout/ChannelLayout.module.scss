@@ -1,6 +1,7 @@
 .layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  min-width: var(--min-width);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing-4);
   text-align: center;
 }
