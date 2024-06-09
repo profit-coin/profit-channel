@@ -1,0 +1,11 @@
+.actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: var(--spacing-4) 0 0 0;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.action {
+  padding: 8px;
+}

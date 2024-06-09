@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import ChannelLayout from '@/features/channel/ChannelLayout/ChannelLayout'
+import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { Channel } from '@/features/channel/types'
 // TODO: Mock: Replace with real data
 import { channels } from '@/mocks/channels'
