@@ -9,6 +9,12 @@ import { channels } from '@/mocks/channels'
 const ChannelsBoard = dynamic(() => import('@/features/channel/ChannelsBoard/ChannelsBoard'), {
   ssr: false,
 })
+const PlayerStat = dynamic(() => import('@/components/PlayerStat/PlayerStat'), {
+  ssr: false,
+})
+const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerActions'), {
+  ssr: false,
+})
 
 function getData(): Channel[] {
   return channels
@@ -32,7 +38,11 @@ export default function Home() {
       </Head>
 
       <ChannelLayout>
+        <PlayerStat />
+
         <ChannelsBoard channels={channelsList} onSelect={handleSelect} onAdd={() => {}} />
+
+        <PlayerActions />
       </ChannelLayout>
     </>
   )
