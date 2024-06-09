@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useGameStore } from '@/features/game/gameStore'
 import { FieldBoard } from '../../field/FieldBoard/FieldBoard'
 import { Field } from '../../field/types'
 import { Channel } from '../types'
@@ -9,10 +10,11 @@ type Props = {
   channel: Channel
   onBack: () => void
   onNext: () => void
-  onEarn: (coins: number) => void
 }
 
-function ChannelItem({ channel, damage, onNext, onEarn, onBack }: Props) {
+function ChannelItem({ channel, damage, onNext, onBack }: Props) {
+  const { increaseGameBalance } = useGameStore()
+
   const [field, setField] = useState<Field>(channel.field)
 
   const handleBoxesRemoved = (removedIds: number[]) => {
@@ -28,7 +30,7 @@ function ChannelItem({ channel, damage, onNext, onEarn, onBack }: Props) {
     })
 
     setField(newField)
-    onEarn(removedIds.length)
+    increaseGameBalance(removedIds.length)
     console.log('Removed box IDs:', removedIds)
   }
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Balance } from '../../../components/Balance/Balance'
+import Balance from '../../../components/Balance/Balance'
 import { channels } from '../../../mocks/channels'
 import ChannelItem from '../../channel/ChannelItem/ChannelItem'
 import ChannelsBoard from '../../channel/ChannelsBoard/ChannelsBoard'
@@ -21,7 +21,7 @@ function GameView() {
 
   return (
     <>
-      <Balance balance={points} />
+      <Balance />
 
       {currentChannel ? (
         <ChannelItem
@@ -30,7 +30,6 @@ function GameView() {
           damage={3}
           onBack={() => setActiveChanelId(null)}
           onNext={handleNextChannel}
-          onEarn={val => setPoints(prev => prev + val)}
         />
       ) : (
         <ChannelsBoard channels={channelsList} onSelect={setActiveChanelId} onAdd={() => {}} />

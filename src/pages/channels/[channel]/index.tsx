@@ -49,7 +49,6 @@ export default function ChannelPage() {
             damage={3}
             onBack={handleBack}
             onNext={handleNextChannel}
-            onEarn={val => {}}
           />
         ) : (
           <div>Channel not found</div>
