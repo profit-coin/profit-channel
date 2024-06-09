@@ -4,11 +4,14 @@ import { useRouter } from 'next/router'
 import DefaultLayout from '@/components/layout/DefaultLayout/DefaultLayout'
 import { Channel } from '@/features/channel/types'
 // TODO: Mock: Replace with real data
-import { channels } from '@/mocks/channels'
+import { channels } from '@/mocks/channels-search'
 
-const ChannelsBoard = dynamic(() => import('@/features/channel/ChannelsBoard/ChannelsBoard'), {
-  ssr: false,
-})
+const ChannelsSuggestedList = dynamic(
+  () => import('@/features/channel/ChannelsSuggestedList/ChannelsSuggestedList'),
+  {
+    ssr: false,
+  },
+)
 
 function getData(): Channel[] {
   return channels
@@ -19,8 +22,8 @@ export default function AddPage() {
 
   const channelsList = getData()
 
-  const handleSelect = (id: Channel['id']) => {
-    router.push(`/channels/${id}`)
+  const handleSelect = (ids: Channel['id'][]) => {
+    console.log('🚀 ~ ids:', ids)
   }
 
   return (
@@ -31,7 +34,9 @@ export default function AddPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <DefaultLayout>FORM</DefaultLayout>
+      <DefaultLayout>
+        <ChannelsSuggestedList channels={channelsList} onSelect={handleSelect} />
+      </DefaultLayout>
     </>
   )
 }

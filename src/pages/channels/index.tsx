@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { Channel } from '@/features/channel/types'
 // TODO: Mock: Replace with real data
@@ -21,13 +20,7 @@ function getData(): Channel[] {
 }
 
 export default function ChannelsPage() {
-  const router = useRouter()
-
   const channelsList = getData()
-
-  const handleSelect = (id: Channel['id']) => {
-    router.push(`/channels/${id}`)
-  }
 
   return (
     <>
@@ -40,7 +33,7 @@ export default function ChannelsPage() {
       <ChannelLayout>
         <PlayerStat />
 
-        <ChannelsBoard channels={channelsList} onSelect={handleSelect} />
+        <ChannelsBoard channels={channelsList} />
 
         <PlayerActions />
       </ChannelLayout>

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { getCookie, setCookie } from 'cookies-next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { TelegramUser } from '@/data/telegram'
 import { Channel } from '@/features/channel/types'
@@ -23,7 +22,6 @@ function getData(): Channel[] {
 }
 
 export default function HomePage() {
-  const router = useRouter()
   const [isAccountCreated, setIsAccountCreated] = useState<boolean>(
     getCookie('isAccountCreated') === 'true',
   )
@@ -47,10 +45,6 @@ export default function HomePage() {
     setCookie('isAccountCreated', 'true')
   }
 
-  const handleSelect = (id: Channel['id']) => {
-    router.push(`/channels/${id}`)
-  }
-
   return (
     <>
       <Head>
@@ -62,7 +56,7 @@ export default function HomePage() {
         {!isAccountCreated ? (
           <CreateAccountFlow theme="light" onAccountCreate={handleAccountCreate} />
         ) : null}
-        {user ? <ChannelsBoard channels={channelsList} onSelect={handleSelect} /> : null}
+        {user ? <ChannelsBoard channels={channelsList} /> : null}
       </ChannelLayout>
     </>
   )

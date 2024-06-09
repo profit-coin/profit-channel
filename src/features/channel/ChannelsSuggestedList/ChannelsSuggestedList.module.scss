@@ -1,0 +1,70 @@
+.searchField {
+  width: 100%;
+  padding: 8px;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  margin: 0 0 8px;
+}
+
+.chanel {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+  margin: 0;
+  border-radius: 0;
+  color: #fff;
+}
+
+.selected {
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.check {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.view {
+  flex: 0 0 80px;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.cover {
+  position: absolute;
+  inset: 0;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.crown {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.info {
+  flex: 1;
+  text-align: left;
+}
+
+.name {
+  margin: 0 0 4px;
+}

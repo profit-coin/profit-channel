@@ -8,12 +8,11 @@ import styles from './ChannelsBoard.module.scss'
 
 interface ChannelsBoardProps {
   channels: Channel[]
-  onSelect: (id: Channel['id']) => void
 }
 
 const CHANNELS_BOARD_SIZE = 20
 
-function ChannelsBoard({ channels, onSelect }: ChannelsBoardProps) {
+function ChannelsBoard({ channels }: ChannelsBoardProps) {
   const emptyChannels = Array.from({ length: CHANNELS_BOARD_SIZE - channels.length }, (_, i) => i)
 
   return (
@@ -25,13 +24,10 @@ function ChannelsBoard({ channels, onSelect }: ChannelsBoardProps) {
       <ul className={styles.list}>
         {channels.map(channel => (
           <li className={styles.item} key={channel.id}>
-            <button
-              className={cn('ghostButton', styles.chanel)}
-              onClick={() => onSelect(channel.id)}
-            >
+            <Link className={cn('ghostButton', styles.chanel)} href={`/channels/${channel.id}`}>
               <img src={channel.cover} alt="" className={styles.cover} />
               {channel.isPremium && <div className={styles.crown}>👑</div>}
-            </button>
+            </Link>
           </li>
         ))}
         {emptyChannels.map(item => (

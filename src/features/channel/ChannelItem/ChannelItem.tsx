@@ -15,7 +15,7 @@ type Props = {
 function ChannelItem({ channel, damage, onNext, onBack }: Props) {
   const { increaseGameBalance } = useGameStore()
 
-  const [field, setField] = useState<Field>(channel.field)
+  const [field, setField] = useState<Field>(channel.field || {})
 
   const handleBoxesRemoved = (removedIds: number[]) => {
     const newField = { ...field }
