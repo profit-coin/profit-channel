@@ -6,4 +6,5 @@ export type Channel = {
   field: Field
   cover?: string
   isPremium: boolean
+  nextChannelId?: string
 }

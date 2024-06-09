@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Balance } from '../../../components/Balance/Balance'
 import { channels } from '../../../mocks/channels'
-import { ChannelItem } from '../../channel/ChannelItem/ChannelItem'
+import ChannelItem from '../../channel/ChannelItem/ChannelItem'
 import ChannelsBoard from '../../channel/ChannelsBoard/ChannelsBoard'
 import { Channel } from '../../channel/types'
 
