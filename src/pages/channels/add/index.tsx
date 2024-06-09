@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
+import DefaultLayout from '@/components/layout/DefaultLayout/DefaultLayout'
 import { Channel } from '@/features/channel/types'
 // TODO: Mock: Replace with real data
 import { channels } from '@/mocks/channels'
@@ -9,18 +9,12 @@ import { channels } from '@/mocks/channels'
 const ChannelsBoard = dynamic(() => import('@/features/channel/ChannelsBoard/ChannelsBoard'), {
   ssr: false,
 })
-const PlayerStat = dynamic(() => import('@/components/PlayerStat/PlayerStat'), {
-  ssr: false,
-})
-const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerActions'), {
-  ssr: false,
-})
 
 function getData(): Channel[] {
   return channels
 }
 
-export default function ChannelsPage() {
+export default function AddPage() {
   const router = useRouter()
 
   const channelsList = getData()
@@ -37,13 +31,7 @@ export default function ChannelsPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <ChannelLayout>
-        <PlayerStat />
-
-        <ChannelsBoard channels={channelsList} onSelect={handleSelect} />
-
-        <PlayerActions />
-      </ChannelLayout>
+      <DefaultLayout>FORM</DefaultLayout>
     </>
   )
 }

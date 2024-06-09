@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import cn from 'classnames'
+import Link from 'next/link'
 import Box from '@/components/common/Box/Box'
 import Heading from '@/components/common/Heading/Heading'
 import { Channel } from '../types'
@@ -8,12 +9,11 @@ import styles from './ChannelsBoard.module.scss'
 interface ChannelsBoardProps {
   channels: Channel[]
   onSelect: (id: Channel['id']) => void
-  onAdd: () => void
 }
 
 const CHANNELS_BOARD_SIZE = 20
 
-function ChannelsBoard({ channels, onSelect, onAdd }: ChannelsBoardProps) {
+function ChannelsBoard({ channels, onSelect }: ChannelsBoardProps) {
   const emptyChannels = Array.from({ length: CHANNELS_BOARD_SIZE - channels.length }, (_, i) => i)
 
   return (
@@ -36,9 +36,9 @@ function ChannelsBoard({ channels, onSelect, onAdd }: ChannelsBoardProps) {
         ))}
         {emptyChannels.map(item => (
           <li className={styles.item} key={item}>
-            <button className={cn('ghostButton', styles.empty)} onClick={onAdd}>
+            <Link className={cn('ghostButton', styles.empty)} href="/channels/add">
               Add channel
-            </button>
+            </Link>
           </li>
         ))}
       </ul>

@@ -32,7 +32,7 @@ function GameView() {
           onNext={handleNextChannel}
         />
       ) : (
-        <ChannelsBoard channels={channelsList} onSelect={setActiveChanelId} onAdd={() => {}} />
+        <ChannelsBoard channels={channelsList} onSelect={setActiveChanelId} />
       )}
     </>
   )

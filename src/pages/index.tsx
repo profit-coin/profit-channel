@@ -22,7 +22,7 @@ function getData(): Channel[] {
   return channels
 }
 
-export default function Home() {
+export default function HomePage() {
   const router = useRouter()
   const [isAccountCreated, setIsAccountCreated] = useState<boolean>(
     getCookie('isAccountCreated') === 'true',
@@ -62,9 +62,7 @@ export default function Home() {
         {!isAccountCreated ? (
           <CreateAccountFlow theme="light" onAccountCreate={handleAccountCreate} />
         ) : null}
-        {user ? (
-          <ChannelsBoard channels={channelsList} onSelect={handleSelect} onAdd={() => {}} />
-        ) : null}
+        {user ? <ChannelsBoard channels={channelsList} onSelect={handleSelect} /> : null}
       </ChannelLayout>
     </>
   )
