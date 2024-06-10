@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, ReactNode } from 'react'
 import cn from 'classnames'
 import dynamic from 'next/dynamic'
 import { Mada } from 'next/font/google'
@@ -14,13 +14,21 @@ const Balance = dynamic(() => import('@/components/Balance/Balance'), {
   ssr: false,
 })
 
-function ChannelLayout({ children }: PropsWithChildren) {
-  return (
-    <main className={cn(styles.layout, font.className)}>
-      <Balance />
+type Props = {
+  nav: ReactNode
+}
 
-      {children}
-    </main>
+function ChannelLayout({ children, nav }: Props & PropsWithChildren) {
+  return (
+    <div className={cn(styles.layout, font.className)}>
+      <main className={styles.main}>
+        <Balance />
+
+        {children}
+      </main>
+
+      {nav}
+    </div>
   )
 }
 

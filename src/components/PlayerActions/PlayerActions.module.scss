@@ -2,10 +2,11 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   margin: var(--spacing-4) 0 0 0;
-  border-radius: 8px;
-  background-color: #fff;
+  background: var(--color-text);
 }
 
 .action {
   padding: 8px;
+  font-weight: 600;
+  color: var(--color-light);
 }

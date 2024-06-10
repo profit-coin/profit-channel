@@ -30,12 +30,10 @@ export default function ChannelsPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <ChannelLayout>
+      <ChannelLayout nav={<PlayerActions />}>
         <PlayerStat />
 
         <ChannelsBoard channels={channelsList} />
-
-        <PlayerActions />
       </ChannelLayout>
     </>
   )

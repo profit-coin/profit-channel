@@ -1,7 +1,15 @@
 .layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   min-width: var(--min-width);
   max-width: var(--max-width);
   margin: 0 auto;
+  overflow-y: auto;
+}
+
+.main {
+  flex: 1;
   padding: var(--spacing-4);
   text-align: center;
 }
