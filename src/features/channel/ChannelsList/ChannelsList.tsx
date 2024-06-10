@@ -16,13 +16,7 @@ function ChannelsList({ channels, onEarn }: Props) {
       <div className={styles.list}>
         {channels.map(channel => (
           <div className={styles.item} key={channel.id}>
-            <ChannelItem
-              channel={channel}
-              damage={damage}
-              onNext={() => {}}
-              onBack={() => {}}
-              onEarn={onEarn}
-            />
+            <ChannelItem channel={channel} damage={damage} onNext={() => {}} onBack={() => {}} />
           </div>
         ))}
       </div>

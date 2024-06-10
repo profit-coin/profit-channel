@@ -1,4 +1,8 @@
 import { useState } from 'react'
+import Box from '@/components/common/Box/Box'
+import Button from '@/components/common/Button/Button'
+import Heading from '@/components/common/Heading/Heading'
+import { useGameStore } from '@/features/game/gameStore'
 import { FieldBoard } from '../../field/FieldBoard/FieldBoard'
 import { Field } from '../../field/types'
 import { Channel } from '../types'
@@ -9,11 +13,12 @@ type Props = {
   channel: Channel
   onBack: () => void
   onNext: () => void
-  onEarn: (coins: number) => void
 }
 
-function ChannelItem({ channel, damage, onNext, onEarn, onBack }: Props) {
-  const [field, setField] = useState<Field>(channel.field)
+function ChannelItem({ channel, damage, onNext, onBack }: Props) {
+  const { increaseGameBalance } = useGameStore()
+
+  const [field, setField] = useState<Field>(channel.field || {})
 
   const handleBoxesRemoved = (removedIds: number[]) => {
     const newField = { ...field }
@@ -28,13 +33,16 @@ function ChannelItem({ channel, damage, onNext, onEarn, onBack }: Props) {
     })
 
     setField(newField)
-    onEarn(removedIds.length)
+    increaseGameBalance(removedIds.length)
     console.log('Removed box IDs:', removedIds)
   }
 
   return (
     <div className={styles.channel}>
-      <h2 className={styles.title}>{channel.name}</h2>
+      <Box mb="6">
+        <Heading size="h1">{channel.name}</Heading>
+      </Box>
+
       <FieldBoard
         field={field}
         cover={channel.cover}
@@ -44,7 +52,9 @@ function ChannelItem({ channel, damage, onNext, onEarn, onBack }: Props) {
       />
 
       <p>
-        <button onClick={onBack}>Back</button>
+        <Button variant="accent" onClick={onBack}>
+          Back
+        </Button>
       </p>
     </div>
   )

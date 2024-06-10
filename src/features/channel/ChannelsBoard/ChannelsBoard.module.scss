@@ -1,31 +1,40 @@
 .list {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  width: 320px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
   padding: 0;
   list-style: none;
 }
 
 .item {
-  width: 25%;
+  width: 100%;
   aspect-ratio: 1 / 1;
 }
 
 .chanel,
 .empty {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
   position: relative;
   width: 100%;
   margin: 0;
   padding: 8px;
   aspect-ratio: 1 / 1;
-  padding: 0;
-  border: 1px solid #000;
-  border-radius: 0;
+  border-radius: var(--card-border-radius);
+  box-shadow:
+    0 4px 0 rgba(#000, 0.2),
+    inset 0 -2px 2px rgba(#855955, 0.4);
+  transition: 0.2s;
+
+  &:hover,
+  &:active {
+    box-shadow: 0 2px 0 rgba(#000, 0.2);
+    transform: translateY(2px);
+  }
 }
 
 .cover {
@@ -34,11 +43,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: inherit;
 }
 
 .empty {
-  background: #d0d0d0;
-  color: #000;
+  border: 2px solid var(--color-border);
+  background: var(--color-panel);
+  color: var(--color-text);
+  text-decoration: none;
 }
 
 .crown {
@@ -47,4 +59,9 @@
   right: 2px;
   font-size: 20px;
   line-height: 1;
+}
+
+.addText {
+  font-size: var(--font-small);
+  font-weight: 600;
 }

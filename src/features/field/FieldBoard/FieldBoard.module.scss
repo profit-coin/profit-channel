@@ -5,6 +5,7 @@
   position: relative;
   width: var(--field-size);
   height: var(--field-size);
+  margin: 40px auto var(--spacing-6);
   user-select: none;
 }
 
@@ -47,7 +48,7 @@ $level-count: 6; // Change this value to adjust the number of levels
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(#000, 0.7);
+  background: rgba(#fff, 0.7);
   color: #000;
 }
 

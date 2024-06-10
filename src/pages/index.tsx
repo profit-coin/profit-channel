@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { getCookie, setCookie } from 'cookies-next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { TelegramUser } from '@/data/telegram'
 import { Channel } from '@/features/channel/types'
 // TODO: Mock: Replace with real data
@@ -21,8 +21,7 @@ function getData(): Channel[] {
   return channels
 }
 
-export default function Home() {
-  const router = useRouter()
+export default function HomePage() {
   const [isAccountCreated, setIsAccountCreated] = useState<boolean>(
     getCookie('isAccountCreated') === 'true',
   )
@@ -46,10 +45,6 @@ export default function Home() {
     setCookie('isAccountCreated', 'true')
   }
 
-  const handleSelect = (id: Channel['id']) => {
-    router.push(`/channels/${id}`)
-  }
-
   return (
     <>
       <Head>
@@ -57,14 +52,12 @@ export default function Home() {
         <meta name="description" content="Profit Channel" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <main>
+      <ChannelLayout>
         {!isAccountCreated ? (
           <CreateAccountFlow theme="light" onAccountCreate={handleAccountCreate} />
         ) : null}
-        {user ? (
-          <ChannelsBoard channels={channelsList} onSelect={handleSelect} onAdd={() => {}} />
-        ) : null}
-      </main>
+        {user ? <ChannelsBoard channels={channelsList} /> : null}
+      </ChannelLayout>
     </>
   )
 }

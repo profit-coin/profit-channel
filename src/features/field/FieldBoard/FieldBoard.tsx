@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { FC, useEffect, useRef, useState } from 'react'
+import Button from '@/components/common/Button/Button'
 import { Timer } from '../../../components/Timer/Timer'
 import { BoxExplosion } from '../BoxExplosion/BoxExplosion'
 import { BoxItem, BoxToRemove } from '../BoxItem/BoxItem'
@@ -91,7 +92,9 @@ export const FieldBoard: FC<Props> = ({ field, damage, cover, onNext, onBoxesRem
           <div className={styles.timer}>
             <Timer initialSeconds={3600} />
           </div>
-          <button onClick={onNext}>Play next channel</button>
+          <Button variant="success" onClick={onNext}>
+            Play next channel
+          </Button>
         </div>
       ) : (
         <div className={styles.levels}>

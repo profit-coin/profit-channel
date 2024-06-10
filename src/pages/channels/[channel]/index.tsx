@@ -1,10 +1,10 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import ChannelLayout from '@/features/channel/ChannelLayout/ChannelLayout'
+import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { Channel } from '@/features/channel/types'
 // TODO: Mock: Replace with real data
-import { channels } from '../../../mocks/channels'
+import { channels } from '@/mocks/channels'
 
 const ChannelItem = dynamic(() => import('@/features/channel/ChannelItem/ChannelItem'), {
   ssr: false,
@@ -49,7 +49,6 @@ export default function ChannelPage() {
             damage={3}
             onBack={handleBack}
             onNext={handleNextChannel}
-            onEarn={val => {}}
           />
         ) : (
           <div>Channel not found</div>

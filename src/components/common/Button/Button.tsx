@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import styles from './Button.module.scss'
 
 interface ButtonProps {
-  variant: 'primary' | 'secondary'
+  variant: 'primary' | 'secondary' | 'success' | 'accent'
   onClick: () => void
 }
 
