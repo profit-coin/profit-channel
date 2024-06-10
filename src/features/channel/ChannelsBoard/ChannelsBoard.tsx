@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { PlusIcon } from '@radix-ui/react-icons'
 import cn from 'classnames'
 import Link from 'next/link'
 import Box from '@/components/common/Box/Box'
@@ -33,7 +34,8 @@ function ChannelsBoard({ channels }: ChannelsBoardProps) {
         {emptyChannels.map(item => (
           <li className={styles.item} key={item}>
             <Link className={cn('ghostButton', styles.empty)} href="/channels/add">
-              Add channel
+              <PlusIcon width={24} height={24} />
+              <span className={styles.addText}>Add channel</span>
             </Link>
           </li>
         ))}

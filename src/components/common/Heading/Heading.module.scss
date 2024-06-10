@@ -1,14 +1,26 @@
 .heading {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .light {
-  color: var(--light-color);
+  color: var(--color-light);
+  text-shadow:
+    -1px -1px 0 var(--color-border),
+    1px -1px 0 var(--color-border),
+    -1px 1px 0 var(--color-border),
+    1px 1px 0 var(--color-border);
 }
 
 .h1 {
-  font-size: 28px;
-  font-weight: inherit;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+
+.h2 {
+  font-size: 20px;
+  font-weight: 600;
   margin-bottom: 0;
   line-height: 1.2;
 }

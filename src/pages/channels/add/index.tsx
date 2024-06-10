@@ -24,6 +24,7 @@ export default function AddPage() {
 
   const handleSelect = (ids: Channel['id'][]) => {
     console.log('🚀 ~ ids:', ids)
+    router.push('/channels')
   }
 
   return (

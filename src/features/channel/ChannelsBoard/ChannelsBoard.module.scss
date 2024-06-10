@@ -1,7 +1,7 @@
 .list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
+  gap: 8px;
   padding: 0;
   list-style: none;
 }
@@ -14,6 +14,7 @@
 .chanel,
 .empty {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
@@ -23,7 +24,17 @@
   margin: 0;
   padding: 8px;
   aspect-ratio: 1 / 1;
-  border-radius: 0;
+  border-radius: var(--card-border-radius);
+  box-shadow:
+    0 4px 0 rgba(#000, 0.2),
+    inset 0 -2px 2px rgba(#855955, 0.4);
+  transition: 0.2s;
+
+  &:hover,
+  &:active {
+    box-shadow: 0 2px 0 rgba(#000, 0.2);
+    transform: translateY(2px);
+  }
 }
 
 .cover {
@@ -32,21 +43,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: inherit;
 }
 
 .empty {
-  background: rgba(#fff, 0.7);
-  border: none;
-  color: #000;
+  border: 2px solid var(--color-border);
+  background: var(--color-panel);
+  color: var(--color-text);
   text-decoration: none;
-
-  &:hover {
-    background: rgba(#fff, 0.9);
-  }
-
-  &:active {
-    background: #fff;
-  }
 }
 
 .crown {
@@ -55,4 +59,9 @@
   right: 2px;
   font-size: 20px;
   line-height: 1;
+}
+
+.addText {
+  font-size: var(--font-small);
+  font-weight: 600;
 }

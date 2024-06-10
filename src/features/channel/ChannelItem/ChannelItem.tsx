@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import Box from '@/components/common/Box/Box'
+import Button from '@/components/common/Button/Button'
+import Heading from '@/components/common/Heading/Heading'
 import { useGameStore } from '@/features/game/gameStore'
 import { FieldBoard } from '../../field/FieldBoard/FieldBoard'
 import { Field } from '../../field/types'
@@ -36,7 +39,10 @@ function ChannelItem({ channel, damage, onNext, onBack }: Props) {
 
   return (
     <div className={styles.channel}>
-      <h2 className={styles.title}>{channel.name}</h2>
+      <Box mb="6">
+        <Heading size="h1">{channel.name}</Heading>
+      </Box>
+
       <FieldBoard
         field={field}
         cover={channel.cover}
@@ -46,7 +52,9 @@ function ChannelItem({ channel, damage, onNext, onBack }: Props) {
       />
 
       <p>
-        <button onClick={onBack}>Back</button>
+        <Button variant="accent" onClick={onBack}>
+          Back
+        </Button>
       </p>
     </div>
   )

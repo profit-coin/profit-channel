@@ -3,6 +3,7 @@ import { useState } from 'react'
 import cn from 'classnames'
 import Link from 'next/link'
 import Box from '@/components/common/Box/Box'
+import Button from '@/components/common/Button/Button'
 import Heading from '@/components/common/Heading/Heading'
 import { Channel } from '../types'
 import styles from './ChannelsSuggestedList.module.scss'
@@ -54,19 +55,15 @@ function ChannelsSuggestedList({ channels, onSelect }: ChannelsBoardProps) {
                   {channel.subscribers?.toLocaleString()} subscribers
                 </p>
               </div>
-              {selectedChannelsIds.includes(channel.id) && <div className={styles.check}>☑️</div>}
             </button>
           </li>
         ))}
       </ul>
 
       <p>
-        <button onClick={() => onSelect(selectedChannelsIds)}>Add selected channels</button>
-      </p>
-
-      <p>
-        {/* TODO: Remove it */}
-        <Link href="/channels">Back</Link>
+        <Button variant="success" onClick={() => onSelect(selectedChannelsIds)}>
+          Add selected channels
+        </Button>
       </p>
     </div>
   )
