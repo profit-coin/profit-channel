@@ -3,19 +3,31 @@ import { useEffect, useState } from 'react'
 import { getCookie, setCookie } from 'cookies-next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { TelegramUser } from '@/data/telegram'
+import { Channel } from '@/features/channel/types'
+// TODO: Mock: Replace with real data
+import { channels } from '../mocks/channels'
 
-const GameView = dynamic(() => import('@/features/game/GameView/GameView'), { ssr: false })
+const ChannelsBoard = dynamic(() => import('@/features/channel/ChannelsBoard/ChannelsBoard'), {
+  ssr: false,
+})
 const CreateAccountFlow = dynamic(
   () => import('@/components/flows/CreateAccountFlow/CreateAccountFlow'),
   { ssr: false },
 )
 
+function getData(): Channel[] {
+  return channels
+}
+
 export default function Home() {
+  const router = useRouter()
   const [isAccountCreated, setIsAccountCreated] = useState<boolean>(
     getCookie('isAccountCreated') === 'true',
   )
   const [user, setUser] = useState<TelegramUser | null>(null)
+  const channelsList = getData()
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
@@ -34,6 +46,10 @@ export default function Home() {
     setCookie('isAccountCreated', 'true')
   }
 
+  const handleSelect = (id: Channel['id']) => {
+    router.push(`/channels/${id}`)
+  }
+
   return (
     <>
       <Head>
@@ -45,7 +61,9 @@ export default function Home() {
         {!isAccountCreated ? (
           <CreateAccountFlow theme="light" onAccountCreate={handleAccountCreate} />
         ) : null}
-        {user ? <GameView /> : null}
+        {user ? (
+          <ChannelsBoard channels={channelsList} onSelect={handleSelect} onAdd={() => {}} />
+        ) : null}
       </main>
     </>
   )

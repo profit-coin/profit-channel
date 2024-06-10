@@ -1,9 +1,10 @@
 import { Field } from '../field/types'
 
 export type Channel = {
-  id: number
+  id: string
   name: string
   field: Field
   cover?: string
   isPremium: boolean
+  nextChannelId?: string
 }

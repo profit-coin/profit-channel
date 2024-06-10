@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import { FieldBoard } from '../../field/FieldBoard/FieldBoard'
 import { Field } from '../../field/types'
 import { Channel } from '../types'
@@ -12,7 +12,7 @@ type Props = {
   onEarn: (coins: number) => void
 }
 
-export const ChannelItem: FC<Props> = ({ channel, damage, onNext, onEarn, onBack }) => {
+function ChannelItem({ channel, damage, onNext, onEarn, onBack }: Props) {
   const [field, setField] = useState<Field>(channel.field)
 
   const handleBoxesRemoved = (removedIds: number[]) => {
@@ -49,3 +49,5 @@ export const ChannelItem: FC<Props> = ({ channel, damage, onNext, onEarn, onBack
     </div>
   )
 }
+
+export default ChannelItem

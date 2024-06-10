@@ -6,7 +6,7 @@ import styles from './ChannelsBoard.module.scss'
 
 interface ChannelsBoardProps {
   channels: Channel[]
-  onSelect: (id: number) => void
+  onSelect: (id: Channel['id']) => void
   onAdd: () => void
 }
 

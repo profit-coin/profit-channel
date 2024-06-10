@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { ChannelItem } from '../ChannelItem/ChannelItem'
+import ChannelItem from '../ChannelItem/ChannelItem'
 import { Channel } from '../types'
 import styles from './ChannelsList.module.scss'
 
@@ -8,7 +8,7 @@ type Props = {
   onEarn: (coins: number) => void
 }
 
-export const ChannelsList: FC<Props> = ({ channels, onEarn }) => {
+function ChannelsList({ channels, onEarn }: Props) {
   const damage = 3
 
   return (
@@ -33,3 +33,5 @@ export const ChannelsList: FC<Props> = ({ channels, onEarn }) => {
     </div>
   )
 }
+
+export default ChannelsList
