@@ -1,10 +1,12 @@
+import { url } from 'inspector'
+
 export const channels = [
   {
     id: '10',
     name: 'Tips AI | IT & AI',
     description: 'Пишу об интересных сервисах, IT и AI технологий!',
-    cover:
-      'https://cdn4.cdn-telegram.org/file/OtFuFsyKSrEhhbrGztaJY0dH4EFmXLYaS1JIukNRaNw1FZqMZ1-ejLqTJj2gsKOQZjzDpXpFjpKndAEK0O6xbW9sAQxWCwFd-LJ2VXC3hwYcLSMvGT1QOCAZfKwi10g96gpqv7E6jNtmSCKzfTH56N_0ffE2UvDMSv7rkx6NiC2pe5dYD8-hXDW9W7qFDahWWLe08rSaf8wkiaJCfi3O7HwD2rxvFWufUXev-6ECJJUbKw_H7TWsGTug4sGWRK1zUCIXqh2ze5ofZedEkYpmqZ_hnfLzLAW6lB6kWX0rgbpJiXmF-fxyaNQICvRuCeAmkWnxQXvhhVBafgE4fp4Q3Q.jpg',
+    cover: '/uploads/covers/tips_ai.jpg',
+    slug: 'tips_ai',
     isPremium: true,
     subscribers: 15761,
   },
@@ -12,8 +14,8 @@ export const channels = [
     id: '20',
     name: 'эйай ньюз',
     description: 'Культурно освещаю самые и не самые важные новости из мира AI...',
-    cover:
-      'https://cdn4.cdn-telegram.org/file/WHdRje8i2WZrDFXQWlNrBHjxfofYujmFf9guy391h74fGWcqp9Qom-kFvqrefJ03dCJfY9T7VOrJ6bVvXtd80cLvjwQHJaEZJQcSowCdBmwWEToUuGYkxcGy2mpx-4hJi5nVnkrUMfsjELJYLwvr5cXNe2uzDUCFpQYsZ50_Tm5y9LT9EcgnNOptIo93Qblf0lphKLIJta53_ya5TW_ETaYG2bKVSX_V3SaYBI-s8MZJgclC603Vm7qi2uyGmFVq5mGcawA3gP5zWtxaHAK84h5OPznAx-2xY8Giwjs6dK162GKfkQGbCPWRZSgo0_8FeMlW31Ltn8mX99_pdUDXbg.jpg',
+    cover: '/uploads/covers/ai_newz.jpg',
+    slug: 'ai_newz.jpg',
     isPremium: true,
     subscribers: 47895,
   },
@@ -21,8 +23,8 @@ export const channels = [
     id: '30',
     name: 'Нейронавт | Нейросети в творчестве',
     description: 'Канал про нейросети в компьютерной графике, в кино и вообще',
-    cover:
-      'https://cdn4.cdn-telegram.org/file/nKVSXeicS7yhY_AGY4nt7l0ruXmA2qpZz7ufT5WgOjnUcTCh5MI4Z8i5x9V8VP6AlOt5P-FURYbGL6lpeoNk9kZG28q8386zNr16dHk5aOf0s1ycZv2ofBl-R4Yz1ICgde8rP61Ty3OxJEQaUsU1ZlvblMrvhdliudBHmlZy52v-_7DmtSqOZSwaumKWQCmXnXpZ44Cox3C4FxyPbyRJBlM17sCC2PsKOXVWd3asEoc2EaS6f-DlbDVcWmIpdJnkERlCtRTDMJ1qbTSkvcWOirUnzE882ghVjV_0eNZMQWA2hmDm3OzCP0szfHHraRADWw-8mQ5eG3dRYNXaAMAekA.jpg',
+    cover: '/uploads/covers/GreenNeuralRobots.jpg',
+    slug: 'GreenNeuralRobots',
     isPremium: false,
     subscribers: 4830,
   },
@@ -30,8 +32,8 @@ export const channels = [
     id: '40',
     name: 'FOMOHOMO',
     description: 'Наш проект Биржа Cryptorg.exchange https://cryptorg.net/?ref=92225',
-    cover:
-      'https://cdn4.cdn-telegram.org/file/i9yC_6lDg9y0ajUGoTGy8dI53GD6So41lURSzAsIfrVM4lKkiIVhgnYye9RL6I9C9AdPUg21Gt5I6hLXHLS2aCAep7xQEmrHHT609NY5fck_KFxPM6zjCEOsgbVyInCOjX_N9BTMny4VSbOk14HM4ievYc49oKYwhkcYW2EAkylUKqdvOelF9csBXp-Kzwq-XTZBe0h-XPAHUgOEFN1zbgZDLTfI2fl17OzHxr1ZV8BiBkgECfxi1NafEk5J9g2-F6SE7ruW9EwctPeHg_0xPIgO4fGRGM05bbSwkF-tboVkmmPM31Q2hIiUMq81xmBf3Tu49bNYk3rwRuTcna6Ayg.jpg',
+    cover: '/uploads/covers/FOMOHOMO.jpg',
+    slug: 'FOMOHOMO',
     isPremium: false,
     subscribers: 8400556,
   },
@@ -39,8 +41,8 @@ export const channels = [
     id: '50',
     name: 'FOKINA.AI',
     description: 'Медиа от команды Студии Искусственного Интеллекта www.fokina.ai',
-    cover:
-      'https://cdn4.cdn-telegram.org/file/ZJGze3GIIwKeoYu0pa2FLKjz3yvga_QFUEa8JvwuYy1yFBPS5wlUsCMJxjArwx_LpB8SoBPqYxjOSxA_bLiwBILdwfSk4wx8mRaEWEwg2nI51a1Dr5W-aa21Al4kwvmRzIWgq0DFP9hZDITNrHSq4LmANN8AFJ1VGmExBQRvYvEKGNZwzdkXziTyI3f8QUoHaTGASwugjs2c3_Xi7zbGkt-rS8MnwCvyzVVzF-MpQP0kuH00Y5gyW8NCZ82bDhaxfPG1bk6EeDO5iloSE3lExOcilidOQfO-Pzkcnkvwu4d0E2X0Z2WvTaiNlgLGSW54L6m3XbB8Lx1jAqv3_beyCA.jpg',
+    cover: '/uploads/covers/fokina_ai.jpg',
+    slug: 'fokina_ai',
     subscribers: 2723,
     isPremium: false,
   },
