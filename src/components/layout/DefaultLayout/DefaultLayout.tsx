@@ -12,7 +12,11 @@ const font = Mada({
 })
 
 function DefaultLayout({ children }: PropsWithChildren) {
-  return <div className={cn(styles.layout, font.className)}>{children}</div>
+  return (
+    <div className={cn(styles.layout, font.className)}>
+      <main className={styles.main}>{children}</main>
+    </div>
+  )
 }
 
 export default DefaultLayout

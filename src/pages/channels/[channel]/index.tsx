@@ -10,6 +10,10 @@ const ChannelItem = dynamic(() => import('@/features/channel/ChannelItem/Channel
   ssr: false,
 })
 
+const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerActions'), {
+  ssr: false,
+})
+
 function getData(id: Channel['id']): Channel | null {
   const currentChannel = channels.find(channel => channel.id === id)
   return currentChannel || null
@@ -41,7 +45,7 @@ export default function ChannelPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <ChannelLayout>
+      <ChannelLayout nav={<PlayerActions />}>
         {channelData ? (
           <ChannelItem
             key={channelData.id}

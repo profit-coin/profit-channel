@@ -3,11 +3,14 @@ import classNames from 'classnames'
 import styles from './Box.module.scss'
 
 interface BoxProps {
+  mt?: '2' | '4' | '6'
   mb?: '2' | '4' | '6'
 }
 
-function Box({ children, mb }: PropsWithChildren<BoxProps>) {
-  return <div className={classNames(styles.box, styles[`mb${mb}`])}>{children}</div>
+function Box({ children, mt, mb }: PropsWithChildren<BoxProps>) {
+  return (
+    <div className={classNames(styles.box, styles[`mb${mb}`], styles[`mt${mt}`])}>{children}</div>
+  )
 }
 
 export default Box

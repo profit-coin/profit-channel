@@ -6,7 +6,17 @@
 }
 
 .action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 8px;
   font-weight: 600;
   color: var(--color-light);
+  text-align: center;
+  text-decoration: none;
+  font-size: var(--font-small);
+}
+
+.active {
+  background: linear-gradient(to bottom, rgba(#fff, 0.1) 0%, rgba(#fff, 0) 100%);
 }

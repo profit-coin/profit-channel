@@ -34,8 +34,14 @@ function ChannelsBoard({ channels }: ChannelsBoardProps) {
         {emptyChannels.map(item => (
           <li className={styles.item} key={item}>
             <Link className={cn('ghostButton', styles.empty)} href="/channels/add">
-              <PlusIcon width={24} height={24} />
-              <span className={styles.addText}>Add channel</span>
+              <div>
+                <PlusIcon width={20} height={20} />
+                <div className={styles.addText}>
+                  Add
+                  <br />
+                  channel
+                </div>
+              </div>
             </Link>
           </li>
         ))}

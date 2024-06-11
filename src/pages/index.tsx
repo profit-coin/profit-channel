@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { getCookie, setCookie } from 'cookies-next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
+import DefaultLayout from '@/components/layout/DefaultLayout/DefaultLayout'
 import { TelegramUser } from '@/data/telegram'
 import { Channel } from '@/features/channel/types'
 // TODO: Mock: Replace with real data
@@ -52,12 +52,12 @@ export default function HomePage() {
         <meta name="description" content="Profit Channel" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <ChannelLayout>
+      <DefaultLayout>
         {!isAccountCreated ? (
           <CreateAccountFlow theme="light" onAccountCreate={handleAccountCreate} />
         ) : null}
         {user ? <ChannelsBoard channels={channelsList} /> : null}
-      </ChannelLayout>
+      </DefaultLayout>
     </>
   )
 }
