@@ -20,10 +20,10 @@
   padding: 8px;
   border-radius: var(--card-border-radius-big);
   border: 2px solid var(--color-border);
-  background: var(--color-panel);
-  color: var(--color-text);
+  background: #eedaa3;
   box-shadow:
     0 4px 0 rgba(#000, 0.2),
+    inset 0 2px 2px rgba(#fff, 0.8),
     inset 0 -2px 2px rgba(#855955, 0.4);
   font-size: var(--font-base);
   text-align: left;
@@ -42,10 +42,19 @@
 }
 
 .title {
+  --color-shadow: #c0781a;
   font-weight: 600;
+  color: #ffcf03;
+  text-shadow:
+    -1px -1px 0 var(--color-shadow),
+    1px -1px 0 var(--color-shadow),
+    -1px 1px 0 var(--color-shadow),
+    1px 1px 0 var(--color-shadow);
 }
 
 .description {
   margin-top: 4px;
   font-size: var(--font-small);
+  font-weight: 600;
+  color: var(--color-border);
 }
