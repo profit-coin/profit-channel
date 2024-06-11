@@ -22,7 +22,7 @@ export const channels = [
     name: 'Нейронавт | Нейросети в творчестве',
     description: 'Канал про нейросети в компьютерной графике, в кино и вообще',
     cover:
-      'https://cdn4.cdn-telegram.org/file/kcdfqUFimtEBjakWgEljIzJ5jarEtivUy_OEMc1KnBz77qdaHdv1r41zjVIyYAxsnlnozAWBtHHkaAlFBNhRt1NPpCj3fGpTl33CEInRhp-zciD3YcEIuS7Ny1RTZeJ9xEZl4MTAN2RahSl-l4ocpOg6fabynr1Fd221KGP8300zNIIg3Ptkhltg8_WHnovzJqLx_XmN61DtW1zJEPVmvP0Otcq8spb0Lo7nN1TwvtAzR95-cBJYYd8mjfAzRenpV_gek-Bjc3v-Wha8GFQmPtXv0MklOJJz2-9vW4ooJek5VlTSB4bkSGQHeYzq1fUriQ_KRNNlD7twgbwdYo8Vsg.jpg',
+      'https://cdn4.cdn-telegram.org/file/nKVSXeicS7yhY_AGY4nt7l0ruXmA2qpZz7ufT5WgOjnUcTCh5MI4Z8i5x9V8VP6AlOt5P-FURYbGL6lpeoNk9kZG28q8386zNr16dHk5aOf0s1ycZv2ofBl-R4Yz1ICgde8rP61Ty3OxJEQaUsU1ZlvblMrvhdliudBHmlZy52v-_7DmtSqOZSwaumKWQCmXnXpZ44Cox3C4FxyPbyRJBlM17sCC2PsKOXVWd3asEoc2EaS6f-DlbDVcWmIpdJnkERlCtRTDMJ1qbTSkvcWOirUnzE882ghVjV_0eNZMQWA2hmDm3OzCP0szfHHraRADWw-8mQ5eG3dRYNXaAMAekA.jpg',
     isPremium: false,
     subscribers: 4830,
   },
