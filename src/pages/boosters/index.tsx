@@ -18,6 +18,7 @@ export default function BoostersPage() {
 
       <ChannelLayout>
         <Boosters />
+        <br />
         <p>
           <Link href="/">Home</Link>
         </p>
