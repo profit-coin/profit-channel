@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 
-const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerActions'), {
+const Boosters = dynamic(() => import('@/features/game/Boosters/Boosters'), {
   ssr: false,
 })
 
@@ -16,8 +16,8 @@ export default function BoostersPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <ChannelLayout nav={<PlayerActions />}>
-        Boosters
+      <ChannelLayout>
+        <Boosters />
         <p>
           <Link href="/">Home</Link>
         </p>

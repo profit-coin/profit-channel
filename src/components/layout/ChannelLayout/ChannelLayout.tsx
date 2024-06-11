@@ -15,7 +15,7 @@ const Balance = dynamic(() => import('@/components/Balance/Balance'), {
 })
 
 type Props = {
-  nav: ReactNode
+  nav?: ReactNode
 }
 
 function ChannelLayout({ children, nav }: Props & PropsWithChildren) {

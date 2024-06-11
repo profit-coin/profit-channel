@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect } from 'react'
+import Box from '@/components/common/Box/Box'
 import Button from '@/components/common/Button/Button'
 import Heading from '@/components/common/Heading/Heading'
 import Text from '@/components/common/Text/Text'
@@ -20,15 +21,24 @@ function CreateAccountFlow({ theme = 'light', onAccountCreate }: CreateAccountFl
   return (
     <div className={styles.flow}>
       <img src="/coin.png" className={styles.logo} alt="" />
-      <Heading theme={theme} size="h1">
-        Welcome to Profit Game
-      </Heading>
-      <Text color="primary" size="large">
-        Create an account to start playing and earning PROFIT tokens
-      </Text>
-      <Button onClick={handleCreateAccount} variant="primary">
-        Create account
-      </Button>
+
+      <Box mb="6">
+        <Heading theme={theme} size="h1">
+          Welcome to Profit Game
+        </Heading>
+      </Box>
+
+      <Box mb="6">
+        <Text color="primary" size="large">
+          Create an account to start playing and earning PROFIT tokens
+        </Text>
+      </Box>
+
+      <div>
+        <Button variant="primary" onClick={handleCreateAccount}>
+          Create account
+        </Button>
+      </div>
     </div>
   )
 }
