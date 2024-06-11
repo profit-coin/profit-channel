@@ -47,6 +47,7 @@
 }
 
 .empty {
+  padding: 2px;
   border: 2px solid var(--color-border);
   background: var(--color-panel);
   color: var(--color-text);
@@ -62,6 +63,6 @@
 }
 
 .addText {
-  font-size: var(--font-small);
+  font-size: var(--font-tiny);
   font-weight: 600;
 }

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { getCookie, setCookie } from 'cookies-next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
+import PlayerActions from '@/components/PlayerActions/PlayerActions'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { TelegramUser } from '@/data/telegram'
 import { Channel } from '@/features/channel/types'
@@ -52,7 +53,7 @@ export default function HomePage() {
         <meta name="description" content="Profit Channel" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <ChannelLayout>
+      <ChannelLayout nav={<PlayerActions />}>
         {!isAccountCreated ? (
           <CreateAccountFlow theme="light" onAccountCreate={handleAccountCreate} />
         ) : null}
