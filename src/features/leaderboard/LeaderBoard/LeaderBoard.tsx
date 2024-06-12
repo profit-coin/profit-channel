@@ -12,7 +12,10 @@ const LeadersStat = dynamic(() => import('../leadersStat/LeadersStat'), {
 const Leaders = [
   { name: 'noName', lvl: 3, money: 23543 },
   { name: 'andr_ewtf', lvl: 1, money: 10000 },
-  { name: 'itechmeat', lvl: 1, money: 8000 },
+  { name: 'itechmeat', lvl: 2, money: 8000 },
+  { name: 'someone_was_here', lvl: 1, money: 6000 },
+  { name: 'someone_was_here', lvl: 1, money: 6000 },
+  { name: 'someone_was_here', lvl: 1, money: 6000 },
 ]
 
 type Props = {}
@@ -21,7 +24,7 @@ function LeaderBoard() {
   return (
     <div className={styles.boosters}>
       <Box mb="6">
-        <Heading size="h2">Free boosters</Heading>
+        <Heading size="h2">Leader Board</Heading>
       </Box>
 
       <LeadersStat />
