@@ -5,11 +5,11 @@ import styles from './LeadersStat.module.scss'
 function LeadersStat() {
   return (
     <Card className={styles.stat}>
-      <div className={styles.progress}>
+      <div className={styles.total_users}>
         <Title className={styles.name}>Total Users</Title>
         <div className={styles.level}>1,292,212</div>
       </div>
-      <div className={styles.clan}>
+      <div className={styles.place}>
         <Title className={styles.name}>Your Place</Title>
         <div className={styles.level}>2</div>
       </div>

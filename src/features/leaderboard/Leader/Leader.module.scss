@@ -30,6 +30,20 @@
   background: var(--color-panel);
 }
 
+.place {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.top_place {
+  background: #ffcf03;
+  border-radius: 0;
+}
+
 .text {
   flex: 1;
 }

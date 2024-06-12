@@ -13,9 +13,10 @@ const Leaders = [
   { name: 'noName', lvl: 3, money: 23543 },
   { name: 'andr_ewtf', lvl: 1, money: 10000 },
   { name: 'itechmeat', lvl: 2, money: 8000 },
-  { name: 'someone_was_here', lvl: 1, money: 6000 },
-  { name: 'someone_was_here', lvl: 1, money: 6000 },
-  { name: 'someone_was_here', lvl: 1, money: 6000 },
+  { name: 'someone_was_here', lvl: 1, money: 6020 },
+  { name: 'snakls', lvl: 1, money: 6000 },
+  { name: 'DavidHan', lvl: 1, money: 5892 },
+  { name: 'number1', lvl: 1, money: 5670 },
 ]
 
 type Props = {}
@@ -31,7 +32,13 @@ function LeaderBoard() {
 
       <div className={styles.leaders}>
         {Leaders.map((leader, index) => (
-          <Leader key={index} name={leader.name} lvl={leader.lvl} money={leader.money}></Leader>
+          <Leader
+            key={index}
+            place={index + 1}
+            name={leader.name}
+            lvl={leader.lvl}
+            money={leader.money}
+          ></Leader>
         ))}
       </div>
     </div>
