@@ -1,0 +1,10 @@
+.title {
+  --color-shadow: #c0781a;
+  font-weight: 600;
+  color: #ffcf03;
+  text-shadow:
+    -1px -1px 0 var(--color-shadow),
+    1px -1px 0 var(--color-shadow),
+    -1px 1px 0 var(--color-shadow),
+    1px 1px 0 var(--color-shadow);
+}
