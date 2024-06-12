@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
-import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
+import Hero from '@/components/Hero/Hero'
+import DefaultLayout from '@/components/layout/DefaultLayout/DefaultLayout'
 
 const Boosters = dynamic(() => import('@/features/game/Boosters/Boosters'), {
   ssr: false,
@@ -16,13 +17,10 @@ export default function BoostersPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <ChannelLayout>
+      <DefaultLayout>
+        <Hero showBalance />
         <Boosters />
-        <br />
-        <p>
-          <Link href="/">Home</Link>
-        </p>
-      </ChannelLayout>
+      </DefaultLayout>
     </>
   )
 }
