@@ -1,9 +1,13 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
-import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
+import DefaultLayout from '@/components/layout/DefaultLayout/DefaultLayout'
+import { channelsCampaigns } from '@/mocks/channels-campaigns'
 
-const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerActions'), {
+const Hero = dynamic(() => import('@/components/Hero/Hero'), {
+  ssr: false,
+})
+const EarnList = dynamic(() => import('@/features/earn/EarnList/EarnList'), {
   ssr: false,
 })
 
@@ -16,12 +20,10 @@ export default function BoostersPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <ChannelLayout nav={<PlayerActions />}>
-        Earn{' '}
-        <p>
-          <Link href="/">Home</Link>
-        </p>
-      </ChannelLayout>
+      <DefaultLayout>
+        <Hero title="Earn More" />
+        <EarnList campaigns={channelsCampaigns} />
+      </DefaultLayout>
     </>
   )
 }
