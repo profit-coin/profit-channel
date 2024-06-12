@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
+import LeaderBoard from '@/features/game/LeaderBoard/LeaderBoard'
 
 const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerActions'), {
   ssr: false,
@@ -17,10 +18,10 @@ export default function BoostersPage() {
       </Head>
 
       <ChannelLayout nav={<PlayerActions />}>
-        Leaderboard{' '}
-        <p>
+        <LeaderBoard />
+        {/* <p>
           <Link href="/">Home</Link>
-        </p>
+        </p> */}
       </ChannelLayout>
     </>
   )
