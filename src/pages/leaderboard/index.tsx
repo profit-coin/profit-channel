@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
-import LeaderBoard from '@/features/game/LeaderBoard/LeaderBoard'
+import LeaderBoard from '@/features/leaderboard/LeaderBoard/LeaderBoard'
 
 const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerActions'), {
   ssr: false,
