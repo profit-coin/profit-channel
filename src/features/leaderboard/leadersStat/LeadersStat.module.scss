@@ -1,0 +1,19 @@
+.stat {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+.progress,
+.clan {
+  padding: var(--card-border-radius-big);
+}
+
+.clan {
+  border-left: 1px solid var(--color-border);
+}
+
+.level {
+  font-weight: 600;
+  color: var(--color-border);
+}

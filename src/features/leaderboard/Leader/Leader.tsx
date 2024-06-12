@@ -1,18 +1,26 @@
 import cn from 'classnames'
-import styles from './LeaderBoard.module.scss'
+import Card from '@/components/Card/Card'
+import Title from '@/components/Title/Title'
+import styles from './Leader.module.scss'
 
-type Props = {}
+type Props = {
+  name: string
+  lvl: number
+  money: number
+}
 
-function Leader() {
+function Leader({ name, lvl, money }: Props) {
   return (
     <div className={styles.row}>
-      <button className={cn(styles.booster, 'ghostButton')}>
+      <Card as="button" className={cn(styles.booster, 'ghostButton')}>
         <div className={styles.picture}></div>
         <div className={styles.text}>
-          <div className={styles.title}>andr_ewtf</div>
-          <div className={styles.description}>2000 | LV1</div>
+          <Title className={styles.title}>{name}</Title>
+          <div className={styles.description}>
+            {money} | {lvl} lvl
+          </div>
         </div>
-      </button>
+      </Card>
     </div>
   )
 }
