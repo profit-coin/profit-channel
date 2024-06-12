@@ -4,6 +4,7 @@ import { getCookie, setCookie } from 'cookies-next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import DefaultLayout from '@/components/layout/DefaultLayout/DefaultLayout'
+import { TELEGRAM_THEME_COLOR } from '@/constants/telegram'
 import { TelegramUser } from '@/data/telegram'
 import { Channel } from '@/features/channel/types'
 // TODO: Mock: Replace with real data
@@ -30,8 +31,8 @@ export default function HomePage() {
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
+      window.Telegram.WebApp.headerColor = TELEGRAM_THEME_COLOR
       window.Telegram.WebApp.BackButton.hide()
-      window.Telegram.WebApp.headerColor = 'rgba(71,114,156,1)'
       const query = new URLSearchParams(window.Telegram.WebApp.initData)
       const user = query.get('user')
 
