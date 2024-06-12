@@ -30,7 +30,8 @@ export default function HomePage() {
 
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
-      window.Telegram.WebApp.headerColor = 'rgba(47,44,170,1)'
+      window.Telegram.WebApp.BackButton.hide()
+      window.Telegram.WebApp.headerColor = 'rgba(71,114,156,1)'
       const query = new URLSearchParams(window.Telegram.WebApp.initData)
       const user = query.get('user')
 
