@@ -1,0 +1,28 @@
+.money {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: var(--font-small);
+  font-weight: 600;
+}
+
+.reverted {
+  flex-direction: row-reverse;
+}
+
+.accent {
+  padding: 2px;
+  border-radius: 20px;
+  background: rgba(#553d3b, 0.2);
+}
+
+.sum {
+  .accent & {
+    padding-inline-end: 6px;
+  }
+
+  .accent.reverted & {
+    padding-inline: 6px 0;
+  }
+}

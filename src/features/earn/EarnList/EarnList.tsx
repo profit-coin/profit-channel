@@ -3,6 +3,7 @@ import { FC } from 'react'
 import cn from 'classnames'
 import Link from 'next/link'
 import Card from '@/components/Card/Card'
+import Money from '@/components/Money/Money'
 import Title from '@/components/Title/Title'
 import Box from '@/components/common/Box/Box'
 import Heading from '@/components/common/Heading/Heading'
@@ -29,7 +30,9 @@ function EarnList({ campaigns }: Props) {
             <div className={styles.text}>
               <Title className={styles.name}>{campaign.name}</Title>
               <div className={styles.description}>{campaign.description}</div>
-              <div className={styles.stat}>STAT</div>
+              <div className={styles.stat}>
+                <Money sum={100000} isAccent />
+              </div>
             </div>
           </Card>
         </Link>

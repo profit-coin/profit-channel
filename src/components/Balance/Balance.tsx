@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Coin from '@/components/Coin/Coin'
 import { useGameStore } from '@/features/game/gameStore'
 import styles from './Balance.module.scss'
 
@@ -7,7 +7,7 @@ function Balance() {
 
   return (
     <div className={styles.balance}>
-      <img src="/images/coin.png" className={styles.coin} alt="" />
+      <Coin size={40} />
 
       <div className={styles.sum}>
         {gameBalance.toLocaleString('en-En', { maximumFractionDigits: 3 })}
