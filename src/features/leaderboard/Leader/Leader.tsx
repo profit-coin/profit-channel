@@ -17,7 +17,12 @@ function Leader({ name, lvl, money, place }: Props) {
         {place > 5 ? (
           <div className={styles.place}>{place}</div>
         ) : (
-          <div className={cn(styles.place, styles.top_place)}></div>
+          <div className={cn(styles.place, styles.top_place)}>
+            <img
+              src="https://static-00.iconduck.com/assets.00/cup-icon-2048x2048-zjifyt9g.png"
+              alt="cup"
+            ></img>
+          </div>
         )}
         <div className={styles.picture}></div>
         <div className={styles.text}>

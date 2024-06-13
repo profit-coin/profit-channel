@@ -40,8 +40,12 @@
 }
 
 .top_place {
-  background: #ffcf03;
   border-radius: 0;
+
+  img {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .text {
