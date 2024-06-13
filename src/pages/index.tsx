@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { getCookie, setCookie } from 'cookies-next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import DefaultLayout from '@/components/layout/DefaultLayout/DefaultLayout'
+import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { TELEGRAM_THEME_COLOR } from '@/constants/telegram'
 import { TelegramUser } from '@/data/telegram'
 import { Channel } from '@/features/channel/types'
@@ -17,6 +17,9 @@ const CreateAccountFlow = dynamic(
   () => import('@/components/flows/CreateAccountFlow/CreateAccountFlow'),
   { ssr: false },
 )
+const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerActions'), {
+  ssr: false,
+})
 
 function getData(): Channel[] {
   return channels
@@ -54,12 +57,12 @@ export default function HomePage() {
         <meta name="description" content="Profit Channel" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <DefaultLayout>
+      <ChannelLayout nav={<PlayerActions />}>
         {!isAccountCreated ? (
           <CreateAccountFlow theme="light" onAccountCreate={handleAccountCreate} />
         ) : null}
         {user ? <ChannelsBoard channels={channelsList} /> : null}
-      </DefaultLayout>
+      </ChannelLayout>
     </>
   )
 }

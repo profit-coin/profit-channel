@@ -5,14 +5,16 @@ import styles from './Hero.module.scss'
 
 interface Props {
   title?: string
+  description?: string
   showBalance?: boolean
 }
 
-function Hero({ title, showBalance, children }: PropsWithChildren<Props>) {
+function Hero({ title, description, showBalance, children }: PropsWithChildren<Props>) {
   return (
     <div className={cn(styles.hero)}>
       {title && <h1 className={styles.title}>{title}</h1>}
       {showBalance && <Balance />}
+      {description && <p className={styles.description}>{description}</p>}
       {children}
     </div>
   )

@@ -22,6 +22,11 @@
   padding: var(--spacing-2);
 }
 
+.description {
+  margin: 4px 0;
+  font-size: var(--font-small);
+}
+
 .picture {
   --cover-size: 60px;
   flex: 0 0 var(--cover-size);

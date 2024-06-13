@@ -7,17 +7,32 @@ import { useRouter } from 'next/router'
 import DefaultLayout from '@/components/layout/DefaultLayout/DefaultLayout'
 import { TELEGRAM_THEME_COLOR } from '@/constants/telegram'
 import { TelegramUser } from '@/data/telegram'
+import { Campaign, Task } from '@/features/earn/types'
 import { channelsCampaigns } from '@/mocks/channels-campaigns'
+import { tasks } from '@/mocks/tasks'
 
 const Hero = dynamic(() => import('@/components/Hero/Hero'), {
   ssr: false,
 })
-const EarnList = dynamic(() => import('@/features/earn/EarnList/EarnList'), {
+const EarnBoard = dynamic(() => import('@/features/earn/EarnBoard/EarnBoard'), {
   ssr: false,
 })
 
-export default function EarnPage() {
+function getData(id: Campaign['id']): Campaign | null {
+  const currentChannel = channelsCampaigns.find(campaign => campaign.id === id)
+  return currentChannel || null
+}
+
+// function getTasksData(id: Campaign['id']): Campaign | null {
+//   const currentChannel = channelsCampaigns.find(campaign => campaign.id === id)
+//   return currentChannel || null
+// }
+
+export default function EarnCampaignPage() {
   const { push, query } = useRouter()
+  const { id: channelId } = query
+
+  const campaignData = getData(channelId as Campaign['id'])
 
   const [isAccountCreated, setIsAccountCreated] = useState<boolean>(
     getCookie('isAccountCreated') === 'true',
@@ -29,7 +44,7 @@ export default function EarnPage() {
       window.Telegram.WebApp.headerColor = TELEGRAM_THEME_COLOR
       window.Telegram.WebApp.BackButton.show()
       window.Telegram.WebApp.BackButton.onClick(() => {
-        push('/')
+        push('/earn')
       })
 
       const query = new URLSearchParams(window.Telegram.WebApp.initData)
@@ -50,8 +65,8 @@ export default function EarnPage() {
       </Head>
 
       <DefaultLayout>
-        <Hero title="Earn More" />
-        <EarnList campaigns={channelsCampaigns} />
+        <Hero title={campaignData?.name} description={campaignData?.description} />
+        {campaignData && <EarnBoard campaign={campaignData} tasks={tasks as Task[]} />}
       </DefaultLayout>
     </>
   )
