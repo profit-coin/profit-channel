@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { FC, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import styles from './BoxExplosion.module.scss'
 
@@ -10,7 +10,7 @@ type Props = {
   onRemove: (id: number) => void
 }
 
-export const BoxExplosion: FC<Props> = ({ id, x, y, onRemove }) => {
+function BoxExplosion({ id, x, y, onRemove }: Props) {
   const elementRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -28,3 +28,5 @@ export const BoxExplosion: FC<Props> = ({ id, x, y, onRemove }) => {
     document.body,
   )
 }
+
+export default BoxExplosion

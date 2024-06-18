@@ -1,0 +1,27 @@
+.message {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 4px var(--spacing-2);
+  background: var(--color-primary);
+  color: var(--color-light);
+  opacity: 0.8;
+
+  &.error {
+    background: var(--color-accent);
+  }
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: inherit;
+}

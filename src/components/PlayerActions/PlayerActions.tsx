@@ -5,7 +5,6 @@ import styles from './PlayerActions.module.scss'
 
 function PlayerActions() {
   const pathname = usePathname()
-  console.log('🚀 ~ PlayerActions ~ pathname:', pathname)
 
   const links = [
     { href: '/boosters', icon: '🚀', label: 'Boosters' },

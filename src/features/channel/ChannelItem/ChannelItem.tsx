@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Box from '@/components/common/Box/Box'
 import Button from '@/components/common/Button/Button'
 import Heading from '@/components/common/Heading/Heading'
 import { useGameStore } from '@/features/game/gameStore'
-import { FieldBoard } from '../../field/FieldBoard/FieldBoard'
+import FieldBoard from '../../field/FieldBoard/FieldBoard'
 import { Field } from '../../field/types'
 import { Channel } from '../types'
 import styles from './ChannelItem.module.scss'
@@ -16,9 +16,26 @@ type Props = {
 }
 
 function ChannelItem({ channel, damage, onNext, onBack }: Props) {
-  const { increaseGameBalance } = useGameStore()
+  const { accumulatePoints, sendAccumulatedPoints } = useGameStore()
 
   const [field, setField] = useState<Field>(channel.field || {})
+
+  const addPoints = useCallback(
+    (points: number) => {
+      accumulatePoints(points)
+    },
+    [accumulatePoints],
+  )
+
+  const handleSendPoints = useCallback(() => {
+    sendAccumulatedPoints()
+  }, [sendAccumulatedPoints])
+
+  useEffect(() => {
+    if (Object.keys(field).length === 0) {
+      handleSendPoints()
+    }
+  }, [field, handleSendPoints])
 
   const handleBoxesRemoved = (removedIds: number[]) => {
     const newField = { ...field }
@@ -33,8 +50,8 @@ function ChannelItem({ channel, damage, onNext, onBack }: Props) {
     })
 
     setField(newField)
-    increaseGameBalance(removedIds.length)
-    console.log('Removed box IDs:', removedIds)
+    addPoints(removedIds.length)
+    // console.log('Removed box IDs:', removedIds)
   }
 
   return (

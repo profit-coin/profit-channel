@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { FC, useEffect, useRef, useState } from 'react'
 import Button from '@/components/common/Button/Button'
-import { Timer } from '../../../components/Timer/Timer'
-import { BoxExplosion } from '../BoxExplosion/BoxExplosion'
-import { BoxItem, BoxToRemove } from '../BoxItem/BoxItem'
-import { PointAnimation } from '../PointAnimation/PointAnimation'
+import Timer from '../../../components/Timer/Timer'
+import BoxExplosion from '../BoxExplosion/BoxExplosion'
+import BoxItem, { BoxToRemove } from '../BoxItem/BoxItem'
+import PointAnimation from '../PointAnimation/PointAnimation'
 import { Field } from '../types'
 import styles from './FieldBoard.module.scss'
 
@@ -16,7 +16,7 @@ type Props = {
   onBoxesRemoved: (removedIds: number[]) => void
 }
 
-export const FieldBoard: FC<Props> = ({ field, damage, cover, onNext, onBoxesRemoved }) => {
+function FieldBoard({ field, damage, cover, onNext, onBoxesRemoved }: Props) {
   const screenSize = 320
   const cellSize = screenSize / 5
 
@@ -143,3 +143,5 @@ export const FieldBoard: FC<Props> = ({ field, damage, cover, onNext, onBoxesRem
     </div>
   )
 }
+
+export default FieldBoard

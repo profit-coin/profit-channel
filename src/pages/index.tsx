@@ -17,6 +17,9 @@ const CreateAccountFlow = dynamic(
   () => import('@/components/flows/CreateAccountFlow/CreateAccountFlow'),
   { ssr: false },
 )
+const PlayerStat = dynamic(() => import('@/components/PlayerStat/PlayerStat'), {
+  ssr: false,
+})
 const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerActions'), {
   ssr: false,
 })
@@ -52,7 +55,12 @@ export default function HomePage() {
         {!isAccountCreated ? (
           <CreateAccountFlow theme="light" onAccountCreate={handleAccountCreate} />
         ) : null}
-        {user ? <ChannelsBoard channels={channelsList} /> : null}
+        {user ? (
+          <>
+            <PlayerStat />
+            <ChannelsBoard channels={channelsList} />
+          </>
+        ) : null}
       </ChannelLayout>
     </>
   )
