@@ -4,9 +4,9 @@ import { getCookie, setCookie } from 'cookies-next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
-import { TELEGRAM_THEME_COLOR } from '@/constants/telegram'
 import { TelegramUser } from '@/data/telegram'
 import { Channel } from '@/features/channel/types'
+import { tg } from '@/utils/telegram'
 // TODO: Mock: Replace with real data
 import { channels } from '../mocks/channels'
 
@@ -33,16 +33,7 @@ export default function HomePage() {
   const channelsList = getData()
 
   useEffect(() => {
-    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
-      window.Telegram.WebApp.headerColor = TELEGRAM_THEME_COLOR
-      window.Telegram.WebApp.BackButton.hide()
-      const query = new URLSearchParams(window.Telegram.WebApp.initData)
-      const user = query.get('user')
-
-      if (user) {
-        setUser(JSON.parse(user))
-      }
-    }
+    setUser(tg({}))
   }, [])
 
   const handleAccountCreate = () => {

@@ -1,15 +1,27 @@
+import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import Link from 'next/link'
-import Hero from '@/components/Hero/Hero'
+import { useRouter } from 'next/router'
 import DefaultLayout from '@/components/layout/DefaultLayout/DefaultLayout'
-import LeaderBoard from '@/features/leaderboard/LeaderBoard/LeaderBoard'
+import { TelegramUser } from '@/data/telegram'
+import { tg } from '@/utils/telegram'
 
-const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerActions'), {
+const Hero = dynamic(() => import('@/components/Hero/Hero'), {
+  ssr: false,
+})
+const LeaderBoard = dynamic(() => import('@/features/leaderboard/LeaderBoard/LeaderBoard'), {
   ssr: false,
 })
 
 export default function BoostersPage() {
+  const router = useRouter()
+
+  const [user, setUser] = useState<TelegramUser | null>(null)
+
+  useEffect(() => {
+    setUser(tg({ router, backButton: '/' }))
+  }, [router])
+
   return (
     <>
       <Head>
