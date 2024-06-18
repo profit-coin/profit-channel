@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { TelegramUser } from '@/data/telegram'
 import { Channel } from '@/features/channel/types'
+import { useGameStore } from '@/features/game/gameStore'
 // TODO: Mock: Replace with real data
 import { channels } from '@/mocks/channels'
 import { tg } from '@/utils/telegram'
@@ -24,6 +25,7 @@ function getData(id: Channel['id']): Channel | null {
 
 export default function ChannelPage() {
   const router = useRouter()
+  const { initializeBalance } = useGameStore()
 
   const {
     query: { channel: channelId },
@@ -36,6 +38,10 @@ export default function ChannelPage() {
   useEffect(() => {
     setUser(tg({ router, backButton: '/channels' }))
   }, [router])
+
+  useEffect(() => {
+    initializeBalance()
+  }, [initializeBalance])
 
   const handleBack = () => {
     // TODO: Use Telegram.WebApp.BackButton
