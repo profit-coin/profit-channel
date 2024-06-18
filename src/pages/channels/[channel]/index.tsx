@@ -1,10 +1,13 @@
+import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
+import { TelegramUser } from '@/data/telegram'
 import { Channel } from '@/features/channel/types'
 // TODO: Mock: Replace with real data
 import { channels } from '@/mocks/channels'
+import { tg } from '@/utils/telegram'
 
 const ChannelItem = dynamic(() => import('@/features/channel/ChannelItem/ChannelItem'), {
   ssr: false,
@@ -27,6 +30,12 @@ export default function ChannelPage() {
   } = router
 
   const channelData = getData(channelId as Channel['id'])
+
+  const [user, setUser] = useState<TelegramUser | null>(null)
+
+  useEffect(() => {
+    setUser(tg({ router, backButton: '/channels' }))
+  }, [router])
 
   const handleBack = () => {
     // TODO: Use Telegram.WebApp.BackButton

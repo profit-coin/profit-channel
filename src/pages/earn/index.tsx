@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react'
 import { getCookie } from 'cookies-next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import DefaultLayout from '@/components/layout/DefaultLayout/DefaultLayout'
-import { TELEGRAM_THEME_COLOR } from '@/constants/telegram'
 import { TelegramUser } from '@/data/telegram'
 import { channelsCampaigns } from '@/mocks/channels-campaigns'
+import { tg } from '@/utils/telegram'
 
 const Hero = dynamic(() => import('@/components/Hero/Hero'), {
   ssr: false,
@@ -17,7 +16,7 @@ const EarnList = dynamic(() => import('@/features/earn/EarnList/EarnList'), {
 })
 
 export default function EarnPage() {
-  const { push, query } = useRouter()
+  const router = useRouter()
 
   const [isAccountCreated, setIsAccountCreated] = useState<boolean>(
     getCookie('isAccountCreated') === 'true',
@@ -25,21 +24,8 @@ export default function EarnPage() {
   const [user, setUser] = useState<TelegramUser | null>(null)
 
   useEffect(() => {
-    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
-      window.Telegram.WebApp.headerColor = TELEGRAM_THEME_COLOR
-      window.Telegram.WebApp.BackButton.show()
-      window.Telegram.WebApp.BackButton.onClick(() => {
-        push('/')
-      })
-
-      const query = new URLSearchParams(window.Telegram.WebApp.initData)
-      const user = query.get('user')
-
-      if (user) {
-        setUser(JSON.parse(user))
-      }
-    }
-  }, [push])
+    setUser(tg({ router, backButton: '/' }))
+  }, [router])
 
   return (
     <>
