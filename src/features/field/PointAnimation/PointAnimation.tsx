@@ -10,7 +10,7 @@ type Props = {
   onRemove: (id: number) => void
 }
 
-export const PointAnimation: FC<Props> = ({ id, x, y, count, onRemove }) => {
+function PointAnimation({ id, x, y, count, onRemove }: Props) {
   const elementRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -45,3 +45,5 @@ export const PointAnimation: FC<Props> = ({ id, x, y, count, onRemove }) => {
     document.body,
   )
 }
+
+export default PointAnimation

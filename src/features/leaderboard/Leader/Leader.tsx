@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import cn from 'classnames'
 import Card from '@/components/Card/Card'
 import Title from '@/components/Title/Title'

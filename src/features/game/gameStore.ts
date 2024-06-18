@@ -15,6 +15,7 @@ type GameState = {
   accumulatePoints: (points: number) => void
   sendAccumulatedPoints: () => void
   initializeBalance: () => void
+  clearError: () => void
 }
 
 type ApiResponse = {
@@ -22,7 +23,6 @@ type ApiResponse = {
 }
 
 const fetchInitialBalance = async (): Promise<ApiResponse> => {
-  // TODO: Implement fetching initial balance from the API
   const response = await fetch('/api/initial-balance', {
     method: 'GET',
     headers: {
@@ -31,14 +31,13 @@ const fetchInitialBalance = async (): Promise<ApiResponse> => {
   })
 
   if (!response.ok) {
-    throw new Error('Failed to fetch initial balance')
+    throw new Error('Failed to fetch balance')
   }
 
   return response.json()
 }
 
 const sendPointsToApi = async (points: number): Promise<ApiResponse> => {
-  // TODO: Implement sending points to the API
   const response = await fetch('/api/endpoint', {
     method: 'POST',
     headers: {
@@ -115,6 +114,8 @@ export const useGameStore = create<GameState>()(
           })
         }
       },
+
+      clearError: () => set({ error: null }),
     }),
     { name: 'gameStore' },
   ),

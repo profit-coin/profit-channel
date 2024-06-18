@@ -1,11 +1,11 @@
-import { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './Timer.module.scss'
 
 type Props = {
   initialSeconds: number
 }
 
-export const Timer: FC<Props> = ({ initialSeconds }) => {
+function Timer({ initialSeconds }: Props) {
   const [time, setTime] = useState(initialSeconds)
 
   useEffect(() => {
@@ -28,3 +28,5 @@ export const Timer: FC<Props> = ({ initialSeconds }) => {
 
   return <div className={styles.timer}>{formatTime(time)}</div>
 }
+
+export default Timer

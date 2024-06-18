@@ -17,7 +17,7 @@ type Props = {
   onRemove: (val: BoxToRemove) => void
 }
 
-export const BoxItem: FC<Props> = ({ box, positionKey, cellSize, level, onRemove }) => {
+function BoxItem({ box, positionKey, cellSize, level, onRemove }: Props) {
   const [x, y] = positionKey.split('-').map(Number)
 
   return (
@@ -41,3 +41,5 @@ export const BoxItem: FC<Props> = ({ box, positionKey, cellSize, level, onRemove
     </div>
   )
 }
+
+export default BoxItem
