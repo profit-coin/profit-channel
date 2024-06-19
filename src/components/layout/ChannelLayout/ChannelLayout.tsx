@@ -3,6 +3,7 @@ import cn from 'classnames'
 import dynamic from 'next/dynamic'
 import { Mada } from 'next/font/google'
 import { useGameStore } from '@/features/game/gameStore'
+import { useBalance } from '@/hooks/useApi'
 import styles from './ChannelLayout.module.scss'
 
 const font = Mada({
@@ -23,15 +24,17 @@ type Props = {
 }
 
 function ChannelLayout({ children, nav }: Props & PropsWithChildren) {
-  const { clearError, error, initializeBalance } = useGameStore()
+  const { data: balanceData, error: balanceError, isLoading: isBalanceLoading } = useBalance()
 
   useEffect(() => {
-    initializeBalance()
-  }, [initializeBalance])
+    if (balanceData) {
+      useGameStore.setState({ gameBalance: balanceData.gameBalance })
+    }
+  }, [balanceData])
 
   return (
     <div className={cn(styles.layout, font.className)}>
-      {/* {error && <SystemMessage text={error} type="error" onClose={clearError} />} */}
+      {/* {balanceError && <SystemMessage text={balanceError.toString()} type="error" />} */}
 
       <main className={styles.main}>
         <Balance />

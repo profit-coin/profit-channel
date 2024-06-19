@@ -3,22 +3,33 @@ import Box from '@/components/common/Box/Box'
 import Button from '@/components/common/Button/Button'
 import Heading from '@/components/common/Heading/Heading'
 import { useGameStore } from '@/features/game/gameStore'
+import { useGameById, useSendPoints, useSettings } from '@/hooks/useApi'
 import FieldBoard from '../../field/FieldBoard/FieldBoard'
 import { Field } from '../../field/types'
-import { Channel } from '../types'
+import { ChannelGame } from '../types'
 import styles from './ChannelItem.module.scss'
 
 type Props = {
-  damage: number
-  channel: Channel
+  channelGame: ChannelGame
   onBack: () => void
   onNext: () => void
 }
 
-function ChannelItem({ channel, damage, onNext, onBack }: Props) {
-  const { accumulatePoints, sendAccumulatedPoints } = useGameStore()
+function ChannelItem({ channelGame, onNext, onBack }: Props) {
+  const {
+    gameBalance,
+    playerLevel,
+    levelProgress,
+    accumulatedPoints,
+    accumulatePoints,
+    isLoading,
+    error,
+    clearError,
+  } = useGameStore()
+  const { data: settingsData, error: settingsError, isLoading: isSettingsLoading } = useSettings()
+  const sendPointsMutation = useSendPoints()
 
-  const [field, setField] = useState<Field>(channel.field || {})
+  const [field, setField] = useState<Field>(channelGame.field || {})
 
   const addPoints = useCallback(
     (points: number) => {
@@ -28,8 +39,8 @@ function ChannelItem({ channel, damage, onNext, onBack }: Props) {
   )
 
   const handleSendPoints = useCallback(() => {
-    sendAccumulatedPoints()
-  }, [sendAccumulatedPoints])
+    sendPointsMutation.mutate(accumulatedPoints)
+  }, [accumulatedPoints, sendPointsMutation])
 
   useEffect(() => {
     if (Object.keys(field).length === 0) {
@@ -57,13 +68,13 @@ function ChannelItem({ channel, damage, onNext, onBack }: Props) {
   return (
     <div className={styles.channel}>
       <Box mb="6">
-        <Heading size="h1">{channel.name}</Heading>
+        <Heading size="h1">{channelGame.name}</Heading>
       </Box>
 
       <FieldBoard
         field={field}
-        cover={channel.cover}
-        damage={damage}
+        cover={channelGame.cover}
+        damage={settingsData?.damage || 1}
         onNext={onNext}
         onBoxesRemoved={handleBoxesRemoved}
       />

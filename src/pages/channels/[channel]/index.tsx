@@ -4,9 +4,11 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { TelegramUser } from '@/data/telegram'
-import { Channel } from '@/features/channel/types'
+import { Channel, ChannelGame } from '@/features/channel/types'
+import { useGameById } from '@/hooks/useApi'
 // TODO: Mock: Replace with real data
 import { channels } from '@/mocks/channels'
+import { distributeBoxes } from '@/utils/distributeBoxes'
 import { tg } from '@/utils/telegram'
 
 const ChannelItem = dynamic(() => import('@/features/channel/ChannelItem/ChannelItem'), {
@@ -17,9 +19,10 @@ const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerAct
   ssr: false,
 })
 
-function getData(id: Channel['id']): Channel | null {
-  const currentChannel = channels.find(channel => channel.id === id)
-  return currentChannel || null
+function getData(id: Channel['id']): ChannelGame | null {
+  const currentChannel = channels?.find(channel => channel.id === id)
+  if (!currentChannel) return null
+  return { ...currentChannel, field: distributeBoxes(currentChannel.cellNum, 5) } as ChannelGame
 }
 
 export default function ChannelPage() {
@@ -30,6 +33,12 @@ export default function ChannelPage() {
   } = router
 
   const channelData = getData(channelId as Channel['id'])
+
+  const {
+    data: gameData,
+    error: gameError,
+    isLoading: isGameLoading,
+  } = useGameById(channelId as string)
 
   const [user, setUser] = useState<TelegramUser | null>(null)
 
@@ -58,8 +67,7 @@ export default function ChannelPage() {
         {channelData ? (
           <ChannelItem
             key={channelData.id}
-            channel={channelData}
-            damage={3}
+            channelGame={channelData}
             onBack={handleBack}
             onNext={handleNextChannel}
           />

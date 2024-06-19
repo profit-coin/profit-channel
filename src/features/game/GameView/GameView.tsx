@@ -25,8 +25,7 @@ function GameView() {
       {currentChannel ? (
         <ChannelItem
           key={currentChannel.id}
-          channel={currentChannel}
-          damage={3}
+          channelGame={currentChannel}
           onBack={() => setActiveChanelId(null)}
           onNext={handleNextChannel}
         />
