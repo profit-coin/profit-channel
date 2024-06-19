@@ -3,14 +3,15 @@ import Box from '@/components/common/Box/Box'
 import Button from '@/components/common/Button/Button'
 import Heading from '@/components/common/Heading/Heading'
 import { useGameStore } from '@/features/game/gameStore'
-import { useGameById, useSendPoints, useSettings } from '@/hooks/useApi'
+import { useSendPoints, useSettings } from '@/hooks/useApi'
+import { distributeBoxes } from '@/utils/distributeBoxes'
 import FieldBoard from '../../field/FieldBoard/FieldBoard'
 import { Field } from '../../field/types'
-import { ChannelGame } from '../types'
+import { IGameItem } from '../types'
 import styles from './ChannelItem.module.scss'
 
 type Props = {
-  channelGame: ChannelGame
+  channelGame: IGameItem
   onBack: () => void
   onNext: () => void
 }
@@ -29,7 +30,13 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
   const { data: settingsData, error: settingsError, isLoading: isSettingsLoading } = useSettings()
   const sendPointsMutation = useSendPoints()
 
-  const [field, setField] = useState<Field>(channelGame.field || {})
+  const [field, setField] = useState<Field | null>(null)
+
+  useEffect(() => {
+    if (settingsData && channelGame) {
+      setField(distributeBoxes(channelGame.cell_num, settingsData.field_size))
+    }
+  }, [channelGame, settingsData])
 
   const addPoints = useCallback(
     (points: number) => {
@@ -43,6 +50,7 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
   }, [accumulatedPoints, sendPointsMutation])
 
   useEffect(() => {
+    if (!field) return
     if (Object.keys(field).length === 0) {
       handleSendPoints()
     }
@@ -68,16 +76,18 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
   return (
     <div className={styles.channel}>
       <Box mb="6">
-        <Heading size="h1">{channelGame.name}</Heading>
+        <Heading size="h1">{channelGame.channel.name}</Heading>
       </Box>
 
-      <FieldBoard
-        field={field}
-        cover={channelGame.cover}
-        damage={settingsData?.damage || 1}
-        onNext={onNext}
-        onBoxesRemoved={handleBoxesRemoved}
-      />
+      {field && (
+        <FieldBoard
+          field={field}
+          cover={channelGame.channel.icon_url}
+          damage={settingsData?.damage || 1}
+          onNext={onNext}
+          onBoxesRemoved={handleBoxesRemoved}
+        />
+      )}
 
       <p>
         <Button variant="accent" onClick={onBack}>

@@ -4,17 +4,19 @@ import cn from 'classnames'
 import Link from 'next/link'
 import Box from '@/components/common/Box/Box'
 import Heading from '@/components/common/Heading/Heading'
-import { ChannelItem } from '../types'
+import { IChannelItem } from '../types'
 import styles from './ChannelsBoard.module.scss'
 
 type Props = {
-  channels: ChannelItem[]
+  channels: IChannelItem[]
 }
 
 const CHANNELS_BOARD_SIZE = 20
 
 function ChannelsBoard({ channels }: Props) {
   const emptyChannels = Array.from({ length: CHANNELS_BOARD_SIZE - channels.length }, (_, i) => i)
+
+  if (!channels) return null
 
   return (
     <div className={styles.board}>

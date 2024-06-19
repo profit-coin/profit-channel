@@ -1,9 +1,9 @@
 import ChannelItem from '../ChannelItem/ChannelItem'
-import { Channel } from '../types'
+import { IGameItem } from '../types'
 import styles from './ChannelsList.module.scss'
 
 type Props = {
-  channels: Channel[]
+  channels: IGameItem[]
   onEarn: (coins: number) => void
 }
 

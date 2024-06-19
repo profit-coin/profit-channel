@@ -1,14 +1,13 @@
-// import ProfileHead from '@/components/ProfileHead/ProfileHead';
 import { useEffect, useState } from 'react'
 import { getCookie, setCookie } from 'cookies-next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { TelegramUser } from '@/data/telegram'
-import { Channel } from '@/features/channel/types'
+import { useChannels } from '@/hooks/useApi'
 import { tg } from '@/utils/telegram'
+
 // TODO: Mock: Replace with real data
-import { channels } from '../mocks/channels'
 
 const ChannelsBoard = dynamic(() => import('@/features/channel/ChannelsBoard/ChannelsBoard'), {
   ssr: false,
@@ -24,16 +23,12 @@ const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerAct
   ssr: false,
 })
 
-function getData(): Channel[] {
-  return channels
-}
-
 export default function HomePage() {
   const [isAccountCreated, setIsAccountCreated] = useState<boolean>(
     getCookie('isAccountCreated') === 'true',
   )
   const [user, setUser] = useState<TelegramUser | null>(null)
-  const channelsList = getData()
+  const { data: channelsData, error: channelsError, isLoading: isChannelsLoading } = useChannels()
 
   useEffect(() => {
     setUser(tg({}))
@@ -58,7 +53,7 @@ export default function HomePage() {
         {user ? (
           <>
             <PlayerStat />
-            <ChannelsBoard channels={channelsList} />
+            {channelsData && <ChannelsBoard channels={channelsData} />}
           </>
         ) : null}
       </ChannelLayout>
