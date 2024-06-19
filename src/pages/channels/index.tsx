@@ -4,9 +4,8 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { TelegramUser } from '@/data/telegram'
-import { Channel } from '@/features/channel/types'
+import { useChannels } from '@/hooks/useApi'
 // TODO: Mock: Replace with real data
-import { channels } from '@/mocks/channels'
 import { tg } from '@/utils/telegram'
 
 const ChannelsBoard = dynamic(() => import('@/features/channel/ChannelsBoard/ChannelsBoard'), {
@@ -19,13 +18,10 @@ const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerAct
   ssr: false,
 })
 
-function getData(): Channel[] {
-  return channels
-}
-
 export default function ChannelsPage() {
   const router = useRouter()
-  const channelsList = getData()
+
+  const { data: channelsData, error: channelsError, isLoading: isChannelsLoading } = useChannels()
 
   const [user, setUser] = useState<TelegramUser | null>(null)
 
@@ -44,7 +40,7 @@ export default function ChannelsPage() {
       <ChannelLayout nav={<PlayerActions />}>
         <PlayerStat />
 
-        <ChannelsBoard channels={channelsList} />
+        {channelsData && <ChannelsBoard channels={channelsData} />}
       </ChannelLayout>
     </>
   )

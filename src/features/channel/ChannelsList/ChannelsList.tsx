@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import ChannelItem from '../ChannelItem/ChannelItem'
 import { Channel } from '../types'
 import styles from './ChannelsList.module.scss'

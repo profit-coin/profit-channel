@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Balance, Game, GameSettings } from '@/features/channel/types'
+import { Balance, ChannelItem, Game, GameSettings } from '@/features/channel/types'
 import axiosClient from '../utils/axiosClient'
 
 const fetchBalance = async (): Promise<Balance> => {
@@ -9,6 +9,11 @@ const fetchBalance = async (): Promise<Balance> => {
 
 const fetchSettings = async (): Promise<GameSettings> => {
   const response = await axiosClient.get('/api/settings')
+  return response.data
+}
+
+const fetchChannels = async (): Promise<ChannelItem[]> => {
+  const response = await axiosClient.get('/api/channels')
   return response.data
 }
 
@@ -26,6 +31,13 @@ export const useBalance = () => {
   return useQuery<Balance, Error>({
     queryKey: ['balance'],
     queryFn: fetchBalance,
+  })
+}
+
+export const useChannels = () => {
+  return useQuery<ChannelItem[], Error>({
+    queryKey: ['settings'],
+    queryFn: fetchChannels,
   })
 }
 

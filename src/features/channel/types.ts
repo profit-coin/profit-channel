@@ -1,5 +1,16 @@
 import { Field } from '../field/types'
 
+export type ChannelItem = {
+  id: string
+  name: string
+  slug: string
+  description?: string
+  icon_url?: string
+  is_premium: boolean
+  subscribers?: number
+  next_channel_id?: string
+}
+
 export type Channel = {
   id: string
   name: string
