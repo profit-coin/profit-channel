@@ -12,9 +12,11 @@ function SystemMessage({ type = 'info', text, onClose }: Props) {
   return (
     <div className={cn(styles.message, styles[type])}>
       <span className={styles.text}>{text}</span>
-      <button className={cn(styles.close, 'ghostButton')} onClick={onClose}>
-        <Cross1Icon />
-      </button>
+      {onClose && (
+        <button className={cn(styles.close, 'ghostButton')} onClick={onClose}>
+          <Cross1Icon />
+        </button>
+      )}
     </div>
   )
 }

@@ -13,49 +13,12 @@ type GameState = {
   setPlayerLevel: (level: number) => void
   updateLevelProgress: (progress: number) => void
   accumulatePoints: (points: number) => void
-  sendAccumulatedPoints: () => void
-  initializeBalance: () => void
   clearError: () => void
-}
-
-type ApiResponse = {
-  gameBalance: number
-}
-
-const fetchInitialBalance = async (): Promise<ApiResponse> => {
-  const response = await fetch('/api/initial-balance', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch balance')
-  }
-
-  return response.json()
-}
-
-const sendPointsToApi = async (points: number): Promise<ApiResponse> => {
-  const response = await fetch('/api/endpoint', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ points }),
-  })
-
-  if (!response.ok) {
-    throw new Error('Failed to send points to API')
-  }
-
-  return response.json()
 }
 
 export const useGameStore = create<GameState>()(
   devtools(
-    (set, get) => ({
+    set => ({
       gameBalance: 0,
       playerLevel: 4,
       levelTotal: 3000000,
@@ -77,53 +40,8 @@ export const useGameStore = create<GameState>()(
         }))
       },
 
-      sendAccumulatedPoints: async () => {
-        const { accumulatedPoints } = get()
-        if (accumulatedPoints > 0) {
-          set({ isLoading: true, error: null, accumulatedPoints: 0 })
-          try {
-            const data = await sendPointsToApi(accumulatedPoints)
-            set({
-              gameBalance: data.gameBalance,
-              isLoading: false,
-            })
-          } catch (error) {
-            let errorMessage = 'An unknown error occurred'
-            if (error instanceof Error) {
-              errorMessage = error.message
-            }
-            set({
-              isLoading: false,
-              error: errorMessage,
-            })
-          }
-        }
-      },
-
-      initializeBalance: async () => {
-        try {
-          const data = await fetchInitialBalance()
-          set({ gameBalance: data.gameBalance })
-        } catch (error) {
-          let errorMessage = 'An unknown error occurred'
-          if (error instanceof Error) {
-            errorMessage = error.message
-          }
-          set({
-            error: errorMessage,
-          })
-        }
-      },
-
       clearError: () => set({ error: null }),
     }),
     { name: 'gameStore' },
   ),
 )
-
-setInterval(() => {
-  const { lastUpdateTime, accumulatedPoints, sendAccumulatedPoints } = useGameStore.getState()
-  if (accumulatedPoints > 0 && Date.now() - lastUpdateTime > 1000) {
-    sendAccumulatedPoints()
-  }
-}, 1000)

@@ -9,21 +9,15 @@ type Props = {
 }
 
 function ChannelsList({ channels, onEarn }: Props) {
-  const damage = 3
-
   return (
     <div className={styles.channels}>
       <div className={styles.list}>
         {channels.map(channel => (
           <div className={styles.item} key={channel.id}>
-            <ChannelItem channel={channel} damage={damage} onNext={() => {}} onBack={() => {}} />
+            <ChannelItem channelGame={channel} onNext={() => {}} onBack={() => {}} />
           </div>
         ))}
       </div>
-
-      <p>
-        <b>damage: 3</b>
-      </p>
     </div>
   )
 }
