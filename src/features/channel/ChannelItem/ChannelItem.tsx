@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Box from '@/components/common/Box/Box'
 import Button from '@/components/common/Button/Button'
 import Heading from '@/components/common/Heading/Heading'
@@ -34,6 +34,7 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
   const sendPointsMutation = useSendPoints()
 
   const [field, setField] = useState<Field | null>(null)
+  const lastTapTimeRef = useRef<number | null>(null)
 
   useEffect(() => {
     if (settingsData) {
@@ -50,6 +51,7 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
   const addPoints = useCallback(
     (points: number) => {
       accumulatePoints(points)
+      lastTapTimeRef.current = Date.now()
     },
     [accumulatePoints],
   )
@@ -64,18 +66,14 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const { lastUpdateTime, accumulatedPoints } = useGameStore.getState()
-      if (accumulatedPoints > 0 && Date.now() - lastUpdateTime > 1000) {
-        sendPointsMutation.mutate(accumulatedPoints, {
-          onSuccess: data => {
-            setGameBalance(data.gameBalance)
-          },
-        })
+      if (lastTapTimeRef.current && Date.now() - lastTapTimeRef.current > 1000) {
+        handleSendPoints()
+        lastTapTimeRef.current = null // Reset the timer
       }
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [sendPointsMutation, setGameBalance])
+  }, [handleSendPoints])
 
   useEffect(() => {
     if (!field) return
