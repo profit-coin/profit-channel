@@ -35,6 +35,7 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
 
   const [field, setField] = useState<Field | null>(null)
   const lastTapTimeRef = useRef<number | null>(null)
+  const pointsSentRef = useRef<boolean>(false)
 
   useEffect(() => {
     if (settingsData) {
@@ -52,11 +53,14 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
     (points: number) => {
       accumulatePoints(points)
       lastTapTimeRef.current = Date.now()
+      pointsSentRef.current = false
     },
     [accumulatePoints],
   )
 
   const handleSendPoints = useCallback(() => {
+    if (pointsSentRef.current) return
+    pointsSentRef.current = true
     sendPointsMutation.mutate(accumulatedPoints, {
       onSuccess: data => {
         setGameBalance(data.gameBalance)
