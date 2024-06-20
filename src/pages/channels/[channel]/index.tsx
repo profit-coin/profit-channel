@@ -6,7 +6,6 @@ import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { TelegramUser } from '@/data/telegram'
 import { useGameStore } from '@/features/game/gameStore'
 import { useGameById, useSettings } from '@/hooks/useApi'
-// TODO: Mock: Replace with real data
 import { tg } from '@/utils/telegram'
 
 const ChannelItem = dynamic(() => import('@/features/channel/ChannelItem/ChannelItem'), {
