@@ -1,10 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import data from '../../balance/balance.mock.json'
 
 type BalanceResponse = {
   gameBalance: number
 }
 
-let currentBalance = 1500
+let currentBalance = data.gameBalance
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<BalanceResponse>) {
   const { points } = req.body
