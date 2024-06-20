@@ -64,6 +64,7 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
     sendPointsMutation.mutate(accumulatedPoints, {
       onSuccess: data => {
         setGameBalance(data.gameBalance)
+        useGameStore.setState({ accumulatedPoints: 0 }) // Reset accumulatedPoints after sending
       },
     })
   }, [accumulatedPoints, sendPointsMutation, setGameBalance])

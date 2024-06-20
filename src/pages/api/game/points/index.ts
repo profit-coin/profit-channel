@@ -4,10 +4,12 @@ type BalanceResponse = {
   gameBalance: number
 }
 
+let currentBalance = 1500
+
 export default function handler(req: NextApiRequest, res: NextApiResponse<BalanceResponse>) {
   const { points } = req.body
 
-  const updatedBalance = 1500 + points
+  currentBalance += points
 
-  res.status(200).json({ gameBalance: updatedBalance })
+  res.status(200).json({ gameBalance: currentBalance })
 }
