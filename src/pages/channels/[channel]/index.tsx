@@ -4,7 +4,8 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { TelegramUser } from '@/data/telegram'
-import { useGameById } from '@/hooks/useApi'
+import { useGameStore } from '@/features/game/gameStore'
+import { useGameById, useSettings } from '@/hooks/useApi'
 // TODO: Mock: Replace with real data
 import { tg } from '@/utils/telegram'
 
@@ -18,6 +19,7 @@ const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerAct
 
 export default function ChannelPage() {
   const router = useRouter()
+  const { data: settingsData, error: settingsError, isLoading: isSettingsLoading } = useSettings()
 
   const {
     query: { channel: channelId },
@@ -34,6 +36,12 @@ export default function ChannelPage() {
   useEffect(() => {
     setUser(tg({ router, backButton: '/channels' }))
   }, [router])
+
+  useEffect(() => {
+    if (settingsData) {
+      useGameStore.setState({ gameSettings: settingsData })
+    }
+  }, [settingsData])
 
   const handleBack = () => {
     // TODO: Use Telegram.WebApp.BackButton

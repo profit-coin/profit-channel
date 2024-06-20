@@ -1,8 +1,10 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
+import { IGameSettings } from '../channel/types'
 
 type GameState = {
   gameBalance: number
+  gameSettings: IGameSettings | null
   playerLevel: number
   levelTotal: number
   levelProgress: number
@@ -20,6 +22,7 @@ export const useGameStore = create<GameState>()(
   devtools(
     set => ({
       gameBalance: 0,
+      gameSettings: null,
       playerLevel: 4,
       levelTotal: 3000000,
       levelProgress: 1459384,

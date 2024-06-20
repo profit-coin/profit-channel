@@ -23,20 +23,22 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
     levelProgress,
     accumulatedPoints,
     accumulatePoints,
+    gameSettings,
     isLoading,
     error,
     clearError,
   } = useGameStore()
+
   const { data: settingsData, error: settingsError, isLoading: isSettingsLoading } = useSettings()
   const sendPointsMutation = useSendPoints()
 
   const [field, setField] = useState<Field | null>(null)
 
   useEffect(() => {
-    if (settingsData && channelGame) {
-      setField(distributeBoxes(channelGame.cell_num, settingsData.field_size))
+    if (gameSettings && channelGame) {
+      setField(distributeBoxes(channelGame.cell_num, gameSettings.field_size))
     }
-  }, [channelGame, settingsData])
+  }, [channelGame, gameSettings])
 
   const addPoints = useCallback(
     (points: number) => {
