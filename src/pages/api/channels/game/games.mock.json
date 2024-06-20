@@ -1,0 +1,61 @@
+[
+  {
+    "id": "1",
+    "cell_num": 36,
+    "next_channel_id": "2",
+    "channel": {
+      "id": "1",
+      "name": "TON Crypto News",
+      "icon_url": "/uploads/covers/tonc_news.jpeg",
+      "slug": "tonc_news",
+      "is_premium": true
+    }
+  },
+  {
+    "id": "2",
+    "cell_num": 273,
+    "next_channel_id": "3",
+    "channel": {
+      "id": "2",
+      "name": "TON Community",
+      "icon_url": "/uploads/covers/toncoin.jpeg",
+      "slug": "toncoin",
+      "is_premium": true
+    }
+  },
+  {
+    "id": "3",
+    "cell_num": 139,
+    "next_channel_id": "4",
+    "channel": {
+      "id": "3",
+      "name": "The Daily TON",
+      "icon_url": "/uploads/covers/thedailytonrus.jpeg",
+      "slug": "thedailytonrus",
+      "is_premium": false
+    }
+  },
+  {
+    "id": "4",
+    "cell_num": 200,
+    "next_channel_id": "5",
+    "channel": {
+      "id": "4",
+      "name": "Метаверсище и ИИще 🤖",
+      "icon_url": "/uploads/covers/cgevent.jpeg",
+      "slug": "cgevent",
+      "is_premium": false
+    }
+  },
+  {
+    "id": "5",
+    "cell_num": 19,
+    "channel": {
+      "id": "5",
+      "name": "Notcoin Community",
+      "icon_url": "/uploads/covers/notcoin.jpeg",
+      "slug": "notcoin",
+      "is_premium": false
+    }
+  }
+]

@@ -4,11 +4,8 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { TelegramUser } from '@/data/telegram'
-import { Channel, ChannelGame } from '@/features/channel/types'
-import { useGameById } from '@/hooks/useApi'
-// TODO: Mock: Replace with real data
-import { channels } from '@/mocks/channels'
-import { distributeBoxes } from '@/utils/distributeBoxes'
+import { useGameStore } from '@/features/game/gameStore'
+import { useGameById, useSettings } from '@/hooks/useApi'
 import { tg } from '@/utils/telegram'
 
 const ChannelItem = dynamic(() => import('@/features/channel/ChannelItem/ChannelItem'), {
@@ -19,20 +16,13 @@ const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerAct
   ssr: false,
 })
 
-function getData(id: Channel['id']): ChannelGame | null {
-  const currentChannel = channels?.find(channel => channel.id === id)
-  if (!currentChannel) return null
-  return { ...currentChannel, field: distributeBoxes(currentChannel.cellNum, 5) } as ChannelGame
-}
-
 export default function ChannelPage() {
   const router = useRouter()
+  const { data: settingsData, error: settingsError, isLoading: isSettingsLoading } = useSettings()
 
   const {
     query: { channel: channelId },
   } = router
-
-  const channelData = getData(channelId as Channel['id'])
 
   const {
     data: gameData,
@@ -46,13 +36,19 @@ export default function ChannelPage() {
     setUser(tg({ router, backButton: '/channels' }))
   }, [router])
 
+  useEffect(() => {
+    if (settingsData) {
+      useGameStore.setState({ gameSettings: settingsData })
+    }
+  }, [settingsData])
+
   const handleBack = () => {
     // TODO: Use Telegram.WebApp.BackButton
     router.push('/channels')
   }
 
   const handleNextChannel = () => {
-    router.push(`/channels/${channelData?.nextChannelId}`)
+    router.push(`/channels/${gameData?.next_channel_id}`)
   }
 
   return (
@@ -64,10 +60,10 @@ export default function ChannelPage() {
       </Head>
 
       <ChannelLayout nav={<PlayerActions />}>
-        {channelData ? (
+        {gameData ? (
           <ChannelItem
-            key={channelData.id}
-            channelGame={channelData}
+            key={gameData.id}
+            channelGame={gameData}
             onBack={handleBack}
             onNext={handleNextChannel}
           />

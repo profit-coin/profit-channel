@@ -1,32 +1,25 @@
-import { Field } from '../field/types'
-
-export type Channel = {
+export type IChannelItem = {
   id: string
   name: string
   slug: string
   description?: string
-  cover?: string
-  isPremium: boolean
+  icon_url?: string
+  is_premium: boolean
   subscribers?: number
-  nextChannelId?: string
 }
 
-export type Game = {
+export type IGameItem = {
   id: string
-  channel: Channel
+  channel: IChannelItem
   cell_num: number
   next_channel_id?: string
 }
 
-export type ChannelGame = Channel & {
-  field?: Field
-}
-
-export type GameSettings = {
+export type IGameSettings = {
   damage: number
   field_size: number
 }
 
-export type Balance = {
+export type IGameBalance = {
   gameBalance: number
 }

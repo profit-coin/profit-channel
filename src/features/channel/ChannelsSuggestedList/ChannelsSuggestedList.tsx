@@ -1,22 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from 'react'
 import cn from 'classnames'
-import Link from 'next/link'
 import Box from '@/components/common/Box/Box'
 import Button from '@/components/common/Button/Button'
 import Heading from '@/components/common/Heading/Heading'
-import { Channel } from '../types'
+import { IChannelItem } from '../types'
 import styles from './ChannelsSuggestedList.module.scss'
 
 interface ChannelsBoardProps {
-  channels: Channel[]
-  onSelect: (ids: Channel['id'][]) => void
+  channels: IChannelItem[]
+  onSelect: (ids: IChannelItem['id'][]) => void
 }
 
 function ChannelsSuggestedList({ channels, onSelect }: ChannelsBoardProps) {
-  const [selectedChannelsIds, setSelectedChannelsIds] = useState<Channel['id'][]>([])
+  const [selectedChannelsIds, setSelectedChannelsIds] = useState<IChannelItem['id'][]>([])
 
-  const handleSelect = (id: Channel['id']) => {
+  const handleSelect = (id: IChannelItem['id']) => {
     if (selectedChannelsIds.includes(id)) {
       setSelectedChannelsIds(selectedChannelsIds.filter(selectedId => selectedId !== id))
     } else {
@@ -44,8 +43,8 @@ function ChannelsSuggestedList({ channels, onSelect }: ChannelsBoardProps) {
               onClick={() => handleSelect(channel.id)}
             >
               <div className={styles.view}>
-                <img src={channel.cover} alt="" className={styles.cover} />
-                {channel.isPremium && <div className={styles.crown}>👑</div>}
+                <img src={channel.icon_url} alt="" className={styles.cover} />
+                {channel.is_premium && <div className={styles.crown}>👑</div>}
               </div>
 
               <div className={styles.info}>

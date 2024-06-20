@@ -4,17 +4,19 @@ import cn from 'classnames'
 import Link from 'next/link'
 import Box from '@/components/common/Box/Box'
 import Heading from '@/components/common/Heading/Heading'
-import { Channel } from '../types'
+import { IChannelItem } from '../types'
 import styles from './ChannelsBoard.module.scss'
 
-interface ChannelsBoardProps {
-  channels: Channel[]
+type Props = {
+  channels: IChannelItem[]
 }
 
 const CHANNELS_BOARD_SIZE = 20
 
-function ChannelsBoard({ channels }: ChannelsBoardProps) {
+function ChannelsBoard({ channels }: Props) {
   const emptyChannels = Array.from({ length: CHANNELS_BOARD_SIZE - channels.length }, (_, i) => i)
+
+  if (!channels) return null
 
   return (
     <div className={styles.board}>
@@ -26,8 +28,8 @@ function ChannelsBoard({ channels }: ChannelsBoardProps) {
         {channels.map(channel => (
           <li className={styles.item} key={channel.id}>
             <Link className={cn('ghostButton', styles.chanel)} href={`/channels/${channel.id}`}>
-              <img src={channel.cover} alt="" className={styles.cover} />
-              {channel.isPremium && <div className={styles.crown}>👑</div>}
+              <img src={channel.icon_url} alt="" className={styles.cover} />
+              {channel.is_premium && <div className={styles.crown}>👑</div>}
             </Link>
           </li>
         ))}
