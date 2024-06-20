@@ -28,7 +28,7 @@ const fetchGameById = async (id: string): Promise<IGameItem> => {
 }
 
 const sendPoints = async (points: number): Promise<IGameBalance> => {
-  const response = await axiosClient.post('/game/points', { points })
+  const response = await axiosClient.post('/api/game/points', { points })
   return response.data
 }
 
@@ -41,14 +41,14 @@ export const useBalance = () => {
 
 export const useChannels = () => {
   return useQuery<IChannelItem[], Error>({
-    queryKey: ['settings'],
+    queryKey: ['channels'],
     queryFn: fetchChannels,
   })
 }
 
 export const useChannelsSearch = () => {
   return useQuery<IChannelItem[], Error>({
-    queryKey: ['settings'],
+    queryKey: ['channels', 'search'],
     queryFn: searchChannels,
   })
 }

@@ -15,6 +15,7 @@ type GameState = {
   setPlayerLevel: (level: number) => void
   updateLevelProgress: (progress: number) => void
   accumulatePoints: (points: number) => void
+  setGameBalance: (balance: number) => void
   clearError: () => void
 }
 
@@ -42,6 +43,8 @@ export const useGameStore = create<GameState>()(
           lastUpdateTime: Date.now(),
         }))
       },
+
+      setGameBalance: (balance: number) => set({ gameBalance: balance }),
 
       clearError: () => set({ error: null }),
     }),
