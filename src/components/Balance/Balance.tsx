@@ -10,7 +10,7 @@ function Balance() {
       <Coin size={40} />
 
       <div className={styles.sum}>
-        {gameBalance.toLocaleString('en-En', { maximumFractionDigits: 3 })}
+        {gameBalance?.toLocaleString('en-En', { maximumFractionDigits: 3 })}
       </div>
     </div>
   )

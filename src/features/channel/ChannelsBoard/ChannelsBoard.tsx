@@ -16,7 +16,7 @@ const CHANNELS_BOARD_SIZE = 20
 function ChannelsBoard({ channels }: Props) {
   const emptyChannels = Array.from({ length: CHANNELS_BOARD_SIZE - channels.length }, (_, i) => i)
 
-  if (!channels) return null
+  if (!channels?.length) return null
 
   return (
     <div className={styles.board}>
@@ -25,7 +25,7 @@ function ChannelsBoard({ channels }: Props) {
       </Box>
 
       <ul className={styles.list}>
-        {channels.map(channel => (
+        {channels?.map(channel => (
           <li className={styles.item} key={channel.id}>
             <Link className={cn('ghostButton', styles.chanel)} href={`/channels/${channel.id}`}>
               <img src={channel.icon_url} alt="" className={styles.cover} />
