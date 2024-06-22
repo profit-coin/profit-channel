@@ -21,22 +21,12 @@ $level-count: 6; // Change this value to adjust the number of levels
   top: 0;
   left: 0;
 
-  @for $i from 2 through 20 {
-    &:nth-child(#{$i}) {
-      top: calculate-offset($i - 1, -3px);
-      left: calculate-offset($i - 1, 3px);
-    }
-  }
-}
-
-.cover {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
+  // @for $i from 2 through 20 {
+  //   &:nth-child(#{$i}) {
+  //     top: calculate-offset($i - 1, -3px);
+  //     left: calculate-offset($i - 1, 3px);
+  //   }
+  // }
 }
 
 .done {

@@ -11,112 +11,127 @@
   line-height: calc(var(--cell-size) / 3.8);
   text-align: center;
 
-  &::before,
-  &::after {
-    content: '';
-    box-sizing: border-box;
-    position: absolute;
-    left: 0;
-    background: #ce9911;
-    border-color: #715611;
-    border-style: solid;
-  }
-  &::before {
-    top: 0;
-    width: 3px;
-    height: 100%;
-    transform: translateY(-1.5px) skew(0, -45deg);
-    border-width: 1px 0 0 1px;
-  }
-  &::after {
-    bottom: 0;
-    width: 100%;
-    height: 3px;
-    transform: translateX(1.5px) skew(-45deg, 0);
-    border-width: 0 1px 1px 0;
-  }
-
-  &.hidden {
-    pointer-events: none;
-    animation: shake 0.5s;
-  }
+  // &::before,
+  // &::after {
+  //   content: '';
+  //   box-sizing: border-box;
+  //   position: absolute;
+  //   left: 0;
+  //   background: #ce9911;
+  //   border-color: #715611;
+  //   border-style: solid;
+  //   pointer-events: none;
+  // }
+  // &::before {
+  //   top: 0;
+  //   width: 3px;
+  //   height: 100%;
+  //   transform: translateY(-1.5px) skew(0, -45deg);
+  //   border-width: 1px 0 0 1px;
+  // }
+  // &::after {
+  //   bottom: 0;
+  //   width: 100%;
+  //   height: 3px;
+  //   transform: translateX(1.5px) skew(-45deg, 0);
+  //   border-width: 0 1px 1px 0;
+  // }
 }
 
 .cap {
   box-sizing: border-box;
   position: absolute;
-  top: -3px;
-  left: 3px;
+  // top: -3px;
+  // left: 3px;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  border: calc(var(--cell-size) / 10) solid #ffec9a;
-  background: #ffcc4a;
-  box-shadow:
-    inset 2px -2px 2px rgba(#000, 0.2),
-    inset -2px 2px 0 rgba(#e2a814, 0.9),
-    2px -2px 2px rgba(#000, 0.2);
+  // border: calc(var(--cell-size) / 10) solid #fabd73;
+  // background: #f3b367;
+  background: #f3b367 var(--box-image) no-repeat center;
+  background-size: 80%;
+  // box-shadow:
+  //   inset 2px -2px 2px rgba(#000, 0.2),
+  //   inset -2px 2px 0 rgba(#e2a814, 0.9),
+  //   2px -2px 2px rgba(#000, 0.2);
   cursor: pointer;
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #000;
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+  &::after {
+    content: 'PROFIT';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 10000;
+    top: 40%;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background: rgba(#c29052, 0.7);
+    pointer-events: none;
+    color: #383838;
+    line-height: 100%;
+  }
+}
+
+.shadow {
+  position: absolute;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background: #000;
+  opacity: 0.4;
+  filter: blur(5px);
+  pointer-events: none;
 
   &::before,
   &::after {
     content: '';
     position: absolute;
-    top: 33%;
-    left: 0;
     width: 100%;
-    height: 1px;
-    background: #d9b457;
+    height: 100%;
+  }
+
+  &::before {
+    top: 0;
+    right: 100%;
+    width: 50%;
+    transform: translateY(4.7px) skew(0deg, -15deg);
+    background: linear-gradient(to left, rgba(#000, 1) 0%, rgba(#000, 0.5) 100%);
   }
 
   &::after {
-    top: auto;
-    bottom: 33%;
+    top: 64px;
+    right: 0;
+    height: 14%;
+    transform: translateX(-16px) skew(-75deg, 0deg);
+    background: linear-gradient(to bottom, rgba(#000, 1) 0%, rgba(#000, 0.5) 100%);
   }
 }
 
-.box {
-  --shake-size: 3px;
-  --shake-size-minus: -3px;
-}
-
-@keyframes shake {
-  0% {
-    transform: translateX(0);
-  }
-  10% {
-    transform: translateX(var(--shake-size-minus));
-  }
-  20% {
-    transform: translateX(var(--shake-size));
-  }
-  10% {
-    transform: translateX(var(--shake-size-minus));
-  }
-  20% {
-    transform: translateX(var(--shake-size));
-  }
-  30% {
-    transform: translateX(var(--shake-size-minus));
-  }
-  40% {
-    transform: translateX(var(--shake-size));
-  }
-  50% {
-    transform: translateX(var(--shake-size-minus));
-  }
-  60% {
-    transform: translateX(var(--shake-size));
-  }
-  70% {
-    transform: translateX(var(--shake-size-minus));
-  }
-  80% {
-    transform: translateX(var(--shake-size));
-  }
-  90% {
-    transform: translateX(var(--shake-size-minus));
-  }
-  100% {
-    transform: translateX(0);
-  }
+.cover {
+  position: absolute;
+  inset: 10%;
+  display: block;
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  pointer-events: none;
+  filter: sepia(0.5);
 }

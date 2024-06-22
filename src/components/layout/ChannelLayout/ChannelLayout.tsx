@@ -21,9 +21,10 @@ const Balance = dynamic(() => import('@/components/Balance/Balance'), {
 
 type Props = {
   nav?: ReactNode
+  contentCenter?: boolean
 }
 
-function ChannelLayout({ children, nav }: Props & PropsWithChildren) {
+function ChannelLayout({ children, nav, contentCenter }: Props & PropsWithChildren) {
   const { data: balanceData, error: balanceError, isLoading: isBalanceLoading } = useBalance()
 
   useEffect(() => {
@@ -39,7 +40,7 @@ function ChannelLayout({ children, nav }: Props & PropsWithChildren) {
       <main className={styles.main}>
         <Balance />
 
-        {children}
+        <div className={cn(styles.content, { [styles.center]: contentCenter })}>{children}</div>
       </main>
 
       {nav}
