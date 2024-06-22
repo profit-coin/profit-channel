@@ -17,11 +17,6 @@ const fetchChannels = async (): Promise<IChannelItem[]> => {
   return response.data
 }
 
-const searchChannels = async (): Promise<IChannelItem[]> => {
-  const response = await axiosClient.get('/api/channels/search')
-  return response.data
-}
-
 const fetchGameById = async (id: string): Promise<IGameItem> => {
   const response = await axiosClient.get(`/api/channels/game/${id}`)
   return response.data
@@ -43,13 +38,6 @@ export const useChannels = () => {
   return useQuery<IChannelItem[], Error>({
     queryKey: ['channels'],
     queryFn: fetchChannels,
-  })
-}
-
-export const useChannelsSearch = () => {
-  return useQuery<IChannelItem[], Error>({
-    queryKey: ['channels', 'search'],
-    queryFn: searchChannels,
   })
 }
 

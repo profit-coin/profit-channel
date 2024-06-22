@@ -1,0 +1,32 @@
+.medium {
+  width: 80px;
+  height: 80px;
+}
+
+.large {
+  width: 128px;
+  height: 128px;
+
+  .defaultImage {
+    font-size: 64px;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  border-radius: 64px;
+}
+
+.defaultImage {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  border-radius: 64px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 32px;
+}
