@@ -1,9 +1,13 @@
 import { useState } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import type { AppProps } from 'next/app'
+import type { AppContext, AppInitialProps, AppProps } from 'next/app'
+import { AuthProvider } from '@/auth/authContext'
 import '@/styles/globals.scss'
+import App from 'next/app'
+import {appWithTranslation} from 'next-i18next'
+import nextI18NextConfig from '../../next-i18next.config.js';
 
-export default function App({ Component, pageProps }: AppProps) {
+function CustomApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -18,7 +22,16 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </QueryClientProvider>
   )
 }
+
+CustomApp.getInitialProps = async (context: AppContext): Promise<AppInitialProps> => {
+  return await App.getInitialProps(context);
+};
+
+export default appWithTranslation(CustomApp, nextI18NextConfig);
+
