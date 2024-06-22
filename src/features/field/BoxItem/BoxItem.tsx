@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import cn from 'classnames'
 import styles from './BoxItem.module.scss'
 
@@ -37,9 +36,7 @@ function BoxItem({ positionKey, cellSize, level, isUpper, onRemove }: Props) {
         onClick={e => onRemove({ e, x, y, level })}
         onPointerDown={e => onRemove({ e, x, y, level })}
       >
-        {/* <div>ID: {box.id}</div>
-        <div>L: {box.level}</div>
-        <div>B: {box.below.join(', ') || '--'}</div> */}
+        <div className={styles.sticker} />
       </div>
     </div>
   )
