@@ -11,7 +11,7 @@ export interface InternalUser {
 }
 
 const verifyTelegramUser = async (initData: string) => {
-  const response = await axios.post<InternalUser | null>(`${appConfig.apiBaseUrl}/v1/studio/auth`, { initData });
+  const response = await axios.post<InternalUser | null>(`${appConfig.apiBaseUrl}/v1/game/auth`, { initData });
   return response.data;
 };
 

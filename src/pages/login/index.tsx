@@ -62,15 +62,15 @@ function LoginPage () {
       <div className={styles.content}>
         <Lottie animationData={coinAnimation} className={styles.logo} />
         <Heading size="h1">
-          {t('flows.createAccount.title')}
+          Create Profile
         </Heading>
         <Text color="primary" size="large">
-          {t('flows.createAccount.description')}
+          Create a profile to start gaming and earn awesome rewards!
         </Text>
       </div>
       <div className={styles.footer}>
-        <Button onClick={handleCreateAccount} isFullWidth isLoading={isSubmitting}>
-          {t('flows.createAccount.button')}
+        <Button variant='primary' onClick={handleCreateAccount} isFullWidth isLoading={isSubmitting}>
+          Create Profile
         </Button>
       </div>
     </div>

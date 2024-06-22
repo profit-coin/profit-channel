@@ -17,10 +17,12 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     setIsLoading(true);
     return useInternalAuth(initData)
       .then(user => {
+        console.log('user', user);
         setUser(user);
         setIsLoading(false);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log('error', error);
         setIsLoading(false);
       });
   }

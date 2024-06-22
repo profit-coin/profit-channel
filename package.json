@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "ngrok": "ngrok http --domain=stable-joey-multiply.ngrok-free.app 3000",
+    "dev:3003": "next dev -p 3003",
+    "ngrok": "ngrok http --domain=stable-joey-multiply.ngrok-free.app 3003",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

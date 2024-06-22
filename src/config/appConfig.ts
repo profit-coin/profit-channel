@@ -2,7 +2,7 @@ import isClient from '@/utils/isClient'
 
 export const serverConfig = {
   environment: process.env.NODE_ENV ?? 'Production',
-  apiBaseUrl: process.env.NEXT_PUBLIC_API_URL ?? '',
+  apiBaseUrl: process.env.API_HOST ?? '',
 }
 
 export type AppConfig = typeof serverConfig

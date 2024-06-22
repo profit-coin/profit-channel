@@ -14,7 +14,7 @@ interface CreateUserPayload {
 export const useCreateUserMutation = () => {
   return useMutation<InternalUser | null, unknown, CreateUserPayload>({
     mutationFn: async (data) => {
-      const response = await axios.post(`${appConfig.apiBaseUrl}/v1/studio/user`, data);
+      const response = await axios.post(`${appConfig.apiBaseUrl}/v1/game/user`, data);
       return response.data;
     }
   });
