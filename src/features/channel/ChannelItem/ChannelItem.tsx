@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Box from '@/components/common/Box/Box'
 import Button from '@/components/common/Button/Button'
 import Heading from '@/components/common/Heading/Heading'
@@ -27,12 +27,21 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
     isLoading,
     error,
     clearError,
+    setGameBalance,
   } = useGameStore()
 
   const { data: settingsData, error: settingsError, isLoading: isSettingsLoading } = useSettings()
   const sendPointsMutation = useSendPoints()
 
   const [field, setField] = useState<Field | null>(null)
+  const lastTapTimeRef = useRef<number | null>(null)
+  const pointsSentRef = useRef<boolean>(false)
+
+  useEffect(() => {
+    if (settingsData) {
+      useGameStore.setState({ gameSettings: settingsData })
+    }
+  }, [settingsData])
 
   useEffect(() => {
     if (gameSettings && channelGame) {
@@ -43,13 +52,33 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
   const addPoints = useCallback(
     (points: number) => {
       accumulatePoints(points)
+      lastTapTimeRef.current = Date.now()
+      pointsSentRef.current = false
     },
     [accumulatePoints],
   )
 
   const handleSendPoints = useCallback(() => {
-    sendPointsMutation.mutate(accumulatedPoints)
-  }, [accumulatedPoints, sendPointsMutation])
+    if (pointsSentRef.current) return
+    pointsSentRef.current = true
+    sendPointsMutation.mutate(accumulatedPoints, {
+      onSuccess: data => {
+        setGameBalance(data.gameBalance)
+        useGameStore.setState({ accumulatedPoints: 0 }) // Reset accumulatedPoints after sending
+      },
+    })
+  }, [accumulatedPoints, sendPointsMutation, setGameBalance])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (lastTapTimeRef.current && Date.now() - lastTapTimeRef.current > 1000) {
+        handleSendPoints()
+        lastTapTimeRef.current = null // Reset the timer
+      }
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [handleSendPoints])
 
   useEffect(() => {
     if (!field) return
@@ -72,7 +101,6 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
 
     setField(newField)
     addPoints(removedIds.length)
-    // console.log('Removed box IDs:', removedIds)
   }
 
   return (
