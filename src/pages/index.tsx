@@ -3,6 +3,9 @@ import { getCookie, setCookie } from 'cookies-next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useAuth } from '@/auth/authContext'
+import AuthLayout from '@/components/layout/AuthLayout/AuthLayout'
 import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import { TelegramUser } from '@/data/telegram'
 import { useChannels } from '@/hooks/useApi'
@@ -25,44 +28,18 @@ const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerAct
 })
 
 export default function HomePage() {
-  const [isAccountCreated, setIsAccountCreated] = useState<boolean>(
-    getCookie('isAccountCreated') === 'true',
-  )
-  const [user, setUser] = useState<TelegramUser | null>(null)
-  const { data: channelsData, error: channelsError, isLoading: isChannelsLoading } = useChannels()
-  console.log('🚀 ~ HomePage ~ channelsData:', channelsData)
+  const router = useRouter()
+  const { user, isLoading } = useAuth()
 
   useEffect(() => {
-    setUser(tg({}))
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe) {
+      window.Telegram.WebApp.BackButton.hide()
+    }
   }, [])
 
-  const handleAccountCreate = () => {
-    setIsAccountCreated(true)
-    setCookie('isAccountCreated', 'true')
-  }
-
   return (
-    <>
-      <Head>
-        <title>Profit Channel</title>
-        <meta name="description" content="Profit Channel" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <ChannelLayout nav={<PlayerActions />}>
-        <PlayerStat />
-        {channelsData && <ChannelsBoard channels={channelsData} />}
-      </ChannelLayout>
-      {/* <ChannelLayout nav={<PlayerActions />}>
-        {!isAccountCreated ? (
-          <CreateAccountFlow theme="light" onAccountCreate={handleAccountCreate} />
-        ) : null}
-        {user ? (
-          <>
-            <PlayerStat />
-            {channelsData && <ChannelsBoard channels={channelsData} />}
-          </>
-        ) : null}
-      </ChannelLayout> */}
-    </>
+    <AuthLayout>
+      <button onClick={() => router.push('/channels')}>START THE GAME</button>
+    </AuthLayout>
   )
 }

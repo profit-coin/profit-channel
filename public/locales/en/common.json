@@ -1,0 +1,16 @@
+{
+  "flows": {
+    "createAccount": {
+      "title": "Welcome to Profit Studio",
+      "description": "Create an account to have access to all the features of Profit Studio",
+      "button": "$t(word.createAccount)"
+    }
+  },
+  "myChannelsList": {
+    "title": "My channels",
+    "empty": "You have no channels yet. <br>Add one now!"
+  },
+  "word": {
+    "createAccount": "Create Profile"
+  }
+}

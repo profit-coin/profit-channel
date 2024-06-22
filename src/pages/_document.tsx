@@ -1,4 +1,5 @@
 import { Head, Html, Main, NextScript } from 'next/document'
+import { serverConfig } from '@/config/appConfig'
 
 export default function Document() {
   return (
@@ -19,6 +20,11 @@ export default function Document() {
           <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
         }
         <script>eruda.init();</script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.appConfig = ${JSON.stringify(serverConfig, null, 2)}`,
+          }}
+        ></script>
       </Head>
       <body>
         <Main />
