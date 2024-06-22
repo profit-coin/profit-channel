@@ -13,7 +13,7 @@ import styles from './ChannelItem.module.scss'
 type Props = {
   channelGame: IGameItem
   onBack: () => void
-  onNext: () => void
+  onNext?: () => void
 }
 
 function ChannelItem({ channelGame, onNext, onBack }: Props) {

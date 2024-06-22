@@ -50,6 +50,7 @@ export default function ChannelPage() {
   const handleNextChannel = () => {
     router.push(`/channels/${gameData?.next_channel_id}`)
   }
+  console.log('🚀 ~ handleNextChannel ~ gameData?.next_channel_id:', gameData?.next_channel_id)
 
   return (
     <>
@@ -65,7 +66,7 @@ export default function ChannelPage() {
             key={gameData.id}
             channelGame={gameData}
             onBack={handleBack}
-            onNext={handleNextChannel}
+            onNext={gameData?.next_channel_id ? handleNextChannel : undefined}
           />
         ) : (
           <div>Channel not found</div>

@@ -12,7 +12,7 @@ type Props = {
   field: Field
   damage: number
   cover?: string
-  onNext: () => void
+  onNext?: () => void
   onBoxesRemoved: (removedIds: number[]) => void
 }
 
@@ -91,9 +91,11 @@ function FieldBoard({ field, damage, cover, onNext, onBoxesRemoved }: Props) {
           <div className={styles.timer}>
             <Timer initialSeconds={3600} />
           </div>
-          <Button variant="success" onClick={onNext}>
-            Play next channel
-          </Button>
+          {onNext && (
+            <Button variant="success" onClick={onNext}>
+              Play next channel
+            </Button>
+          )}
         </div>
       ) : (
         <div className={styles.levels}>
