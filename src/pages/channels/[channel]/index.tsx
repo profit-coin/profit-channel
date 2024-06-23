@@ -59,7 +59,7 @@ export default function ChannelPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <ChannelLayout contentCenter nav={<PlayerActions />}>
+      <ChannelLayout contentCenter>
         {gameData ? (
           <ChannelItem
             key={gameData.id}

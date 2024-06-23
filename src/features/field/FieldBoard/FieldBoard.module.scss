@@ -2,10 +2,12 @@
 
 .field {
   --field-size: calc(var(--cell-size) * 5);
+
+  flex: 0 0 auto;
   position: relative;
   width: var(--field-size);
   height: var(--field-size);
-  margin: 40px auto var(--spacing-6);
+  margin: var(--spacing-4) auto;
   user-select: none;
 }
 
@@ -39,12 +41,12 @@ $level-count: 6; // Change this value to adjust the number of levels
   align-items: center;
   justify-content: center;
   // background: rgba(#fff, 0.7);
-  color: #000;
+  color: #f73e10;
 }
 
 .timer {
+  text-shadow: -2px 1px 4px rgba(#000, 0.3);
   font-size: 32px;
-  font-family: 'Bungee Spice', sans-serif;
-  font-weight: 400;
-  font-style: normal;
+  font-family: var(--font-digit);
+  font-weight: 900;
 }

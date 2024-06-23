@@ -105,9 +105,9 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
 
   return (
     <div className={styles.channel}>
-      <Box mb="6">
-        <Heading size="h1">{channelGame.channel.name}</Heading>
-      </Box>
+      <header className={styles.header}>
+        <h1 className={styles.channelName}>{channelGame.channel.name}</h1>
+      </header>
 
       {field && (
         <FieldBoard
@@ -119,11 +119,11 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
         />
       )}
 
-      <p>
+      <footer className={styles.footer}>
         <Button variant="accent" onClick={onBack}>
           Back
         </Button>
-      </p>
+      </footer>
     </div>
   )
 }
