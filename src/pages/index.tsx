@@ -21,6 +21,9 @@ export default function ChannelsPage() {
 
   useEffect(() => {
     hideTelegramBackButton();
+    if (window.Telegram?.WebApp && !window.Telegram?.WebApp?.isExpanded) {
+      window.Telegram.WebApp.expand()
+    }
   }, []);
 
   return (
