@@ -1,4 +1,4 @@
-import { InternalUser, useInternalAuth } from '@/data/auth';
+import { InternalUser, internalAuth } from '@/data/auth';
 import React, { createContext, useContext, useState, useEffect, PropsWithChildren } from 'react';
 
 interface AuthContextProps {
@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   const login = (initData: string) => {
     setIsLoading(true);
-    return useInternalAuth(initData)
+    return internalAuth(initData)
       .then(user => {
         console.log('user', user);
         setUser(user);

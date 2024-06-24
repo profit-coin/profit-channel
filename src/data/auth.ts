@@ -14,6 +14,6 @@ const verifyTelegramUser = async (initData: string) => {
   return user;
 };
 
-export const useInternalAuth = (initData: string) => {
+export const internalAuth = (initData: string) => {
   return verifyTelegramUser(initData);
 };
