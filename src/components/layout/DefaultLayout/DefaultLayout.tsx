@@ -14,6 +14,7 @@ const font = Mada({
 function DefaultLayout({ children }: PropsWithChildren) {
   return (
     <div className={cn(styles.layout, font.className)}>
+      <div className={styles.blur} />
       <main className={styles.main}>{children}</main>
     </div>
   )

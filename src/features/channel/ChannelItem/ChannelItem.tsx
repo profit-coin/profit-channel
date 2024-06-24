@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import Box from '@/components/common/Box/Box'
+import cn from 'classnames'
 import Button from '@/components/common/Button/Button'
-import Heading from '@/components/common/Heading/Heading'
 import { useGameStore } from '@/features/game/gameStore'
 import { useSendPoints, useSettings } from '@/hooks/useApi'
 import { distributeBoxes } from '@/utils/distributeBoxes'
@@ -13,7 +12,7 @@ import styles from './ChannelItem.module.scss'
 type Props = {
   channelGame: IGameItem
   onBack: () => void
-  onNext: () => void
+  onNext?: () => void
 }
 
 function ChannelItem({ channelGame, onNext, onBack }: Props) {
@@ -105,9 +104,9 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
 
   return (
     <div className={styles.channel}>
-      <Box mb="6">
-        <Heading size="h1">{channelGame.channel.name}</Heading>
-      </Box>
+      <header className={styles.header}>
+        <h1 className={cn('namePlate', styles.channelName)}>{channelGame.channel.name}</h1>
+      </header>
 
       {field && (
         <FieldBoard
@@ -119,11 +118,11 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
         />
       )}
 
-      <p>
+      <footer className={styles.footer}>
         <Button variant="accent" onClick={onBack}>
           Back
         </Button>
-      </p>
+      </footer>
     </div>
   )
 }

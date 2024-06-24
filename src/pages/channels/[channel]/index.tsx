@@ -59,13 +59,13 @@ export default function ChannelPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <ChannelLayout nav={<PlayerActions />}>
+      <ChannelLayout contentCenter isBalanceTransformed isBlurred={false}>
         {gameData ? (
           <ChannelItem
             key={gameData.id}
             channelGame={gameData}
             onBack={handleBack}
-            onNext={handleNextChannel}
+            onNext={gameData?.next_channel_id ? handleNextChannel : undefined}
           />
         ) : (
           <div>Channel not found</div>

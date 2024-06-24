@@ -21,9 +21,18 @@ const Balance = dynamic(() => import('@/components/Balance/Balance'), {
 
 type Props = {
   nav?: ReactNode
+  isBlurred?: boolean
+  contentCenter?: boolean
+  isBalanceTransformed?: boolean
 }
 
-function ChannelLayout({ children, nav }: Props & PropsWithChildren) {
+function ChannelLayout({
+  children,
+  nav,
+  isBlurred = true,
+  contentCenter,
+  isBalanceTransformed,
+}: Props & PropsWithChildren) {
   const { data: balanceData, error: balanceError, isLoading: isBalanceLoading } = useBalance()
 
   useEffect(() => {
@@ -37,9 +46,11 @@ function ChannelLayout({ children, nav }: Props & PropsWithChildren) {
       {/* {balanceError && <SystemMessage text={balanceError.toString()} type="error" />} */}
 
       <main className={styles.main}>
-        <Balance />
+        {isBlurred && <div className={styles.blur} />}
 
-        {children}
+        <Balance isTransformed={isBalanceTransformed} />
+
+        <div className={cn(styles.content, { [styles.center]: contentCenter })}>{children}</div>
       </main>
 
       {nav}
