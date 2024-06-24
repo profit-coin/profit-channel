@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { FC, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Button from '@/components/common/Button/Button'
 import Timer from '../../../components/Timer/Timer'
-import BoxExplosion from '../BoxExplosion/BoxExplosion'
+// import BoxExplosion from '../BoxExplosion/BoxExplosion'
 import BoxItem, { BoxToRemove } from '../BoxItem/BoxItem'
 import PointAnimation from '../PointAnimation/PointAnimation'
 import { Field } from '../types'
@@ -12,7 +12,7 @@ type Props = {
   field: Field
   damage: number
   cover?: string
-  onNext: () => void
+  onNext?: () => void
   onBoxesRemoved: (removedIds: number[]) => void
 }
 
@@ -78,42 +78,49 @@ function FieldBoard({ field, damage, cover, onNext, onBoxesRemoved }: Props) {
     addPointAnimation(boxesToRemove.length, val.e.clientX, val.e.clientY)
   }
 
-  const latestExplosions = animations.slice(Math.max(animations.length - 5, 0))
-
   return (
     <div
       ref={boardRef}
       className={styles.field}
-      style={{ '--cell-size': `${cellSize}px` } as React.CSSProperties}
+      style={
+        { '--cell-size': `${cellSize}px`, '--box-image': `url(${cover})` } as React.CSSProperties
+      }
     >
-      {cover && <img src={cover} alt="" className={styles.cover} />}
       {isEmpty ? (
         <div className={styles.done}>
           <div className={styles.timer}>
             <Timer initialSeconds={3600} />
           </div>
-          <Button variant="success" onClick={onNext}>
-            Play next channel
-          </Button>
+          {onNext && (
+            <Button variant="success" onClick={onNext}>
+              Play next channel
+            </Button>
+          )}
         </div>
       ) : (
         <div className={styles.levels}>
           {levels.map(level => (
             <div key={level} className={styles.level}>
-              {Object.keys(field)
+              {Object.keys(currentField)
                 .filter(key => parseInt(key.split('-')[2]) === level)
                 .map(positionKey => {
-                  const boxes = field[positionKey]
-                  return boxes.map(box => (
-                    <BoxItem
-                      key={box.id}
-                      box={box}
-                      positionKey={positionKey}
-                      cellSize={cellSize}
-                      level={level}
-                      onRemove={handleRemoveBox}
-                    />
-                  ))
+                  const boxes = currentField[positionKey]
+                  return boxes.map((box, index) => {
+                    const nextLevel = level + 1
+                    const nextPositionKey = `${box.x}-${box.y}-${nextLevel}`
+                    const isUpper =
+                      !currentField[nextPositionKey] || currentField[nextPositionKey].length === 0
+                    return (
+                      <BoxItem
+                        key={box.id}
+                        positionKey={positionKey}
+                        cellSize={cellSize}
+                        level={level}
+                        isUpper={isUpper}
+                        onRemove={handleRemoveBox}
+                      />
+                    )
+                  })
                 })}
             </div>
           ))}
@@ -131,7 +138,7 @@ function FieldBoard({ field, damage, cover, onNext, onBoxesRemoved }: Props) {
         />
       ))}
 
-      {latestExplosions.map(explosion => (
+      {/* {latestExplosions.map(explosion => (
         <BoxExplosion
           key={explosion.id}
           id={explosion.id}
@@ -139,7 +146,7 @@ function FieldBoard({ field, damage, cover, onNext, onBoxesRemoved }: Props) {
           y={explosion.y}
           onRemove={removePointAnimation}
         />
-      ))}
+      ))} */}
     </div>
   )
 }

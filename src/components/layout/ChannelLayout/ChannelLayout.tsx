@@ -20,16 +20,22 @@ const Balance = dynamic(() => import('@/components/Balance/Balance'), {
 
 type Props = {
   nav?: ReactNode
+  isBlurred?: boolean
+  contentCenter?: boolean
+  isBalanceTransformed?: boolean
 }
 
-function ChannelLayout({ children, nav }: Props & PropsWithChildren) {
+function ChannelLayout({ children, nav, isBlurred = true, contentCenter, isBalanceTransformed }: Props & PropsWithChildren) {
   const { data: balance } = useUserBalance();
 
   return (
     <div className={cn(styles.layout, font.className)}>
       <main className={styles.main}>
-        <Balance balance={balance} />
-        {children}
+        {isBlurred && <div className={styles.blur} />}
+        
+        <Balance balance={balance} isTransformed={isBalanceTransformed} />
+        
+        <div className={cn(styles.content, { [styles.center]: contentCenter })}>{children}</div>
       </main>
       {nav}
     </div>

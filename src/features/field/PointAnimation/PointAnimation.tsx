@@ -40,7 +40,7 @@ function PointAnimation({ id, x, y, count, onRemove }: Props) {
       className={styles.pointAnimation}
       style={{ left: `${x}px`, top: `${y}px` }}
     >
-      {count}
+      +{count}
     </div>,
     document.body,
   )
