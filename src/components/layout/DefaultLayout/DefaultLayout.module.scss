@@ -13,3 +13,10 @@
   padding: var(--spacing-4);
   text-align: center;
 }
+
+.blur {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(3px);
+  pointer-events: none;
+}

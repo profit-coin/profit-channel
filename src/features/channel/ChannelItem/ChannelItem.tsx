@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import Box from '@/components/common/Box/Box'
+import cn from 'classnames'
 import Button from '@/components/common/Button/Button'
-import Heading from '@/components/common/Heading/Heading'
 import { useGameStore } from '@/features/game/gameStore'
 import { useSendPoints, useSettings } from '@/hooks/useApi'
 import { distributeBoxes } from '@/utils/distributeBoxes'
@@ -106,7 +105,7 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
   return (
     <div className={styles.channel}>
       <header className={styles.header}>
-        <h1 className={styles.channelName}>{channelGame.channel.name}</h1>
+        <h1 className={cn('namePlate', styles.channelName)}>{channelGame.channel.name}</h1>
       </header>
 
       {field && (

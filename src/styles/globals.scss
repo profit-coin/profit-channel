@@ -33,3 +33,35 @@ body {
   cursor: pointer;
   outline: none;
 }
+
+.namePlate {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 236px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 3px solid #415379;
+  background: linear-gradient(45deg, #4b5b7c 0%, #677ba3 100%);
+  color: #ecae3c;
+  text-shadow: -1px 1px 1px rgba(#000, 0.2);
+  font-size: 20px;
+  font-weight: 900;
+  font-style: normal;
+  line-height: 1;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 0 0 auto;
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #415379;
+    box-shadow:
+      inset 2px -2px 2px rgba(#000, 0.1),
+      inset -2px 2px 2px rgba(#fff, 0.1);
+  }
+}
