@@ -1,10 +1,11 @@
 import Coin from '@/components/Coin/Coin'
-import { useGameStore } from '@/features/game/gameStore'
 import styles from './Balance.module.scss'
 
-function Balance() {
-  const { gameBalance } = useGameStore()
+interface BalanceProps {
+  balance?: number;
+}
 
+function Balance ({ balance: gameBalance }: BalanceProps) {
   return (
     <div className={styles.balance}>
       <Coin size={40} />

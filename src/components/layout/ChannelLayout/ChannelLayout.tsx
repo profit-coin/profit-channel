@@ -1,10 +1,12 @@
-import { PropsWithChildren, ReactNode, useEffect } from 'react'
+import {
+  PropsWithChildren,
+  ReactNode,
+} from 'react'
 import cn from 'classnames'
 import dynamic from 'next/dynamic'
 import { Mada } from 'next/font/google'
-import { useGameStore } from '@/features/game/gameStore'
-import { useBalance } from '@/hooks/useApi'
 import styles from './ChannelLayout.module.scss'
+import { useUserBalance } from '@/data/user'
 
 const font = Mada({
   display: 'swap',
@@ -12,9 +14,6 @@ const font = Mada({
   weight: ['300', '400', '700', '800'],
 })
 
-const SystemMessage = dynamic(() => import('@/components/SystemMessage/SystemMessage'), {
-  ssr: false,
-})
 const Balance = dynamic(() => import('@/components/Balance/Balance'), {
   ssr: false,
 })
@@ -24,24 +23,14 @@ type Props = {
 }
 
 function ChannelLayout({ children, nav }: Props & PropsWithChildren) {
-  const { data: balanceData, error: balanceError, isLoading: isBalanceLoading } = useBalance()
-
-  useEffect(() => {
-    if (balanceData) {
-      useGameStore.setState({ gameBalance: balanceData.gameBalance })
-    }
-  }, [balanceData])
+  const { data: balance } = useUserBalance();
 
   return (
     <div className={cn(styles.layout, font.className)}>
-      {/* {balanceError && <SystemMessage text={balanceError.toString()} type="error" />} */}
-
       <main className={styles.main}>
-        <Balance />
-
+        <Balance balance={balance} />
         {children}
       </main>
-
       {nav}
     </div>
   )

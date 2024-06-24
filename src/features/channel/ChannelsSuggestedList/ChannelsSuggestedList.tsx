@@ -3,7 +3,7 @@ import cn from 'classnames'
 import Box from '@/components/common/Box/Box'
 import Heading from '@/components/common/Heading/Heading'
 import styles from './ChannelsSuggestedList.module.scss'
-import { PublicChannel } from '@/data/channels'
+import { PublicChannel, useAddChannelToFavoritesMutation } from '@/data/channels'
 import ChannelAvatar from '../ChannelItem/ChannelAvatar/ChannelAvatar'
 import Icon from '@/components/common/Icon/Icon'
 
@@ -12,8 +12,14 @@ interface ChannelsBoardProps {
 }
 
 function ChannelsSuggestedList({ channels }: ChannelsBoardProps) {
-  const handleAddToFavorites = (telegramId: number) => {
-    console.log('Add to favorites')
+  const addChannelToFavoritesMutation = useAddChannelToFavoritesMutation();
+
+  const handleAddToFavorites = async (channelTelegramId: number) => {
+    try {
+      await addChannelToFavoritesMutation.mutateAsync({ channelTelegramId });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (

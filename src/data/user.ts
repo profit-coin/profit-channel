@@ -1,21 +1,31 @@
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
-import appConfig from '@/config/appConfig';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { InternalUser } from './auth';
-
-interface CreateUserPayload {
-  telegramId: number;
-  username: string;
-  firstName?: string;
-  lastName?: string;
-  language?: string;
-}
+import { get, post } from '@/http/http';
 
 export const useCreateUserMutation = () => {
-  return useMutation<InternalUser | null, unknown, CreateUserPayload>({
-    mutationFn: async (data) => {
-      const response = await axios.post(`${appConfig.apiBaseUrl}/v1/game/user`, data);
-      return response.data;
+  return useMutation<InternalUser | null>({
+    mutationFn: async () => {
+      const user = await post('v1/game/user', {});
+      return user;
     }
   });
 }
+
+export const useUserBalance = () => {
+  return useQuery({
+    queryKey: ['balance'],
+    queryFn: async () => {
+      let balance = 0;
+      try {
+        balance = await get<number>('v1/game/user/balance');
+      } catch (error) {
+        console.log(error);
+        return 0;
+      }
+
+      return balance;
+    },
+    refetchInterval: 3000
+  });
+}
+
