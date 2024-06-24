@@ -5,6 +5,7 @@ import ChannelLayout from '@/components/layout/ChannelLayout/ChannelLayout'
 import AuthLayout from '@/components/layout/AuthLayout/AuthLayout'
 import { usePlayerChannels } from '@/data/channels'
 import { hideTelegramBackButton } from '@/utils/telegram'
+import {useAuth} from '@/auth/authContext'
 
 const ChannelsBoard = dynamic(() => import('@/features/channel/ChannelsBoard/ChannelsBoard'), {
   ssr: false,
@@ -17,6 +18,7 @@ const PlayerActions = dynamic(() => import('@/components/PlayerActions/PlayerAct
 })
 
 export default function ChannelsPage() {
+  const { user, isLoading } = useAuth();
   const { data: playerChannels } = usePlayerChannels();
 
   useEffect(() => {
@@ -35,11 +37,13 @@ export default function ChannelsPage() {
       </Head>
 
       <AuthLayout>
-        <ChannelLayout nav={<PlayerActions />}>
-          <PlayerStat />
+        {user && !isLoading ? (
+          <ChannelLayout nav={<PlayerActions />}>
+            <PlayerStat />
 
-          {playerChannels && <ChannelsBoard channels={playerChannels} />}
-        </ChannelLayout>
+            {playerChannels && <ChannelsBoard channels={playerChannels} />}
+          </ChannelLayout>
+        ) : null}
       </AuthLayout>
     </>
   )

@@ -7,14 +7,19 @@ import Heading from '@/components/common/Heading/Heading'
 import styles from './ChannelsBoard.module.scss'
 import { InternalGameChannel } from '@/data/channels'
 import ChannelAvatar from '../ChannelItem/ChannelAvatar/ChannelAvatar'
+import Loader from '@/components/common/Loader/Loader'
 
 type Props = {
-  channels: InternalGameChannel[]
+  channels: InternalGameChannel[] | undefined;
 }
 
 const CHANNELS_BOARD_SIZE = 12
 
 function ChannelsBoard({ channels }: Props) {
+  if (!channels) {
+    return <Loader />
+  }
+
   const emptyChannels = Array.from({ length: CHANNELS_BOARD_SIZE - channels.length }, (_, i) => i)
 
   return (
