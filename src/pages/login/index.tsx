@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Button from '@/components/common/Button/Button'
 import Heading from '@/components/common/Heading/Heading'
@@ -15,7 +14,6 @@ import {useAuth} from '@/auth/authContext'
 function LoginPage () {
   const { login } = useAuth();
   const { push } = useRouter();
-  const { t } = useTranslation();
 
   const [ isSubmitting, setIsSubmitting ] = useState(false);
   const [ telegramUser, setTelegramUser ] = useState<TelegramUser | null>(null)
@@ -40,16 +38,8 @@ function LoginPage () {
 
     setIsSubmitting(true);
     try {
-      await createUserMutation.mutateAsync({
-        telegramId: telegramUser.id,
-        username: telegramUser.username,
-        firstName: telegramUser.first_name,
-        lastName: telegramUser.last_name,
-        language: telegramUser.language_code,
-      });
-
+      await createUserMutation.mutateAsync();
       login && await login(window.Telegram.WebApp.initData);
-
       push('/');
     } catch (error) {
       console.error(error);

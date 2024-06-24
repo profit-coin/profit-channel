@@ -9,16 +9,18 @@ import { InternalGameChannel } from '@/data/channels'
 import ChannelAvatar from '../ChannelItem/ChannelAvatar/ChannelAvatar'
 import Loader from '@/components/common/Loader/Loader'
 
-type Props = {
+type ChannelsBoardProps = {
   channels: InternalGameChannel[] | undefined;
 }
 
 const CHANNELS_BOARD_SIZE = 12
 
-function ChannelsBoard({ channels }: Props) {
+function ChannelsBoard({ channels }: ChannelsBoardProps) {
   if (!channels) {
     return <Loader />
   }
+
+  console.log('channels', channels);
 
   const emptyChannels = Array.from({ length: CHANNELS_BOARD_SIZE - channels.length }, (_, i) => i)
 
@@ -29,7 +31,7 @@ function ChannelsBoard({ channels }: Props) {
       </Box>
 
       <ul className={styles.list}>
-        {channels?.map(channel => (
+        {channels.map(channel => (
           <li className={styles.item} key={channel.telegramId}>
             <Link className={cn('ghostButton', styles.chanel)} href={`/channels/${channel.telegramId}`}>
               {channel ? <ChannelAvatar channel={channel} /> : null}

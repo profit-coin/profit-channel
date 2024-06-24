@@ -36,6 +36,11 @@ export const usePlayerChannels = () => useQuery({
   queryKey: ['playerChannels'],
   queryFn: async () => {
     const channels = await get<InternalGameChannel[]>('v1/game/channels/player');
+
+    if (typeof channels === 'string') {
+      return [];
+    }
+
     return channels;
   }
 });
