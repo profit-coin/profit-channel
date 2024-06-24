@@ -1,15 +1,13 @@
-// import Coin from '@/components/Coin/Coin'
 import cn from 'classnames'
-import { useGameStore } from '@/features/game/gameStore'
+import Coin from '@/components/Coin/Coin'
 import styles from './Balance.module.scss'
 
-type Props = {
-  isTransformed?: boolean
+interface BalanceProps {
+  balance?: number;
+  isTransformed?: boolean;
 }
 
-function Balance({ isTransformed }: Props) {
-  const { gameBalance } = useGameStore()
-
+function Balance ({ balance: gameBalance }: BalanceProps) {
   return (
     <div className={cn(styles.balance, { [styles.transformed]: isTransformed })}>
       <div className={styles.board}>
@@ -22,4 +20,4 @@ function Balance({ isTransformed }: Props) {
     </div>
   )
 }
-export default Balance
+export default Balance;

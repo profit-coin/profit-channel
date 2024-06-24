@@ -33,6 +33,7 @@
   position: relative;
   margin: 0;
   padding: 8px;
+  padding-right: 24px;
   border-radius: var(--card-border-radius-big);
   border: 2px solid var(--color-border);
   background: var(--color-panel);
@@ -62,21 +63,12 @@
   height: 80px;
 }
 
-.cover {
-  position: absolute;
-  inset: 0;
-  width: 80px;
-  height: 80px;
-  border-radius: var(--card-border-radius);
-  object-fit: cover;
-}
-
 .crown {
-  position: absolute;
   top: 2px;
   right: 2px;
   font-size: 20px;
   line-height: 1;
+  position: absolute;
 }
 
 .info {
