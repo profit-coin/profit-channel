@@ -4,19 +4,18 @@ import cn from 'classnames'
 import Link from 'next/link'
 import Box from '@/components/common/Box/Box'
 import Heading from '@/components/common/Heading/Heading'
-import { IChannelItem } from '../types'
 import styles from './ChannelsBoard.module.scss'
+import { InternalGameChannel } from '@/data/channels'
+import ChannelAvatar from '../ChannelItem/ChannelAvatar/ChannelAvatar'
 
 type Props = {
-  channels: IChannelItem[]
+  channels: InternalGameChannel[]
 }
 
-const CHANNELS_BOARD_SIZE = 20
+const CHANNELS_BOARD_SIZE = 12
 
 function ChannelsBoard({ channels }: Props) {
   const emptyChannels = Array.from({ length: CHANNELS_BOARD_SIZE - channels.length }, (_, i) => i)
-
-  if (!channels?.length) return null
 
   return (
     <div className={styles.board}>
@@ -26,10 +25,10 @@ function ChannelsBoard({ channels }: Props) {
 
       <ul className={styles.list}>
         {channels?.map(channel => (
-          <li className={styles.item} key={channel.id}>
-            <Link className={cn('ghostButton', styles.chanel)} href={`/channels/${channel.id}`}>
-              <img src={channel.icon_url} alt="" className={styles.cover} />
-              {channel.is_premium && <div className={styles.crown}>👑</div>}
+          <li className={styles.item} key={channel.telegramId}>
+            <Link className={cn('ghostButton', styles.chanel)} href={`/channels/${channel.telegramId}`}>
+              {channel ? <ChannelAvatar channel={channel} /> : null}
+              {/* channel.is_premium && <div className={styles.crown}>👑</div> */}
             </Link>
           </li>
         ))}

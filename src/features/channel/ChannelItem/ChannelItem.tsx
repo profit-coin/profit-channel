@@ -2,51 +2,41 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import cn from 'classnames'
 import Button from '@/components/common/Button/Button'
 import { useGameStore } from '@/features/game/gameStore'
-import { useSendPoints, useSettings } from '@/hooks/useApi'
+import { useSendPoints } from '@/hooks/useApi'
 import { distributeBoxes } from '@/utils/distributeBoxes'
 import FieldBoard from '../../field/FieldBoard/FieldBoard'
 import { Field } from '../../field/types'
-import { IGameItem } from '../types'
 import styles from './ChannelItem.module.scss'
+import { InternalGameChannel } from '@/data/channels'
+import { IGameSettings } from '../types'
+import {useAddCoinsMutation} from '@/data/coins'
 
 type Props = {
-  channelGame: IGameItem
   onBack: () => void
   onNext?: () => void
+  channel: InternalGameChannel
+  gameSettings: IGameSettings
 }
 
-function ChannelItem({ channelGame, onNext, onBack }: Props) {
+function ChannelItem({ channel, gameSettings, onNext, onBack }: Props) {
   const {
-    gameBalance,
-    playerLevel,
-    levelProgress,
     accumulatedPoints,
     accumulatePoints,
-    gameSettings,
-    isLoading,
-    error,
-    clearError,
     setGameBalance,
   } = useGameStore()
 
-  const { data: settingsData, error: settingsError, isLoading: isSettingsLoading } = useSettings()
   const sendPointsMutation = useSendPoints()
+  const addCoinsMutation = useAddCoinsMutation();
 
   const [field, setField] = useState<Field | null>(null)
   const lastTapTimeRef = useRef<number | null>(null)
   const pointsSentRef = useRef<boolean>(false)
 
   useEffect(() => {
-    if (settingsData) {
-      useGameStore.setState({ gameSettings: settingsData })
+    if (gameSettings && channel) {
+      setField(distributeBoxes(channel.leftPeriodLimit, gameSettings.field_size))
     }
-  }, [settingsData])
-
-  useEffect(() => {
-    if (gameSettings && channelGame) {
-      setField(distributeBoxes(channelGame.cell_num, gameSettings.field_size))
-    }
-  }, [channelGame, gameSettings])
+  }, [channel, gameSettings])
 
   const addPoints = useCallback(
     (points: number) => {
@@ -60,12 +50,24 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
   const handleSendPoints = useCallback(() => {
     if (pointsSentRef.current) return
     pointsSentRef.current = true
-    sendPointsMutation.mutate(accumulatedPoints, {
+
+    addCoinsMutation.mutate({
+      amount: accumulatedPoints,
+      targetChannelTelegramId: channel.telegramId,
+    }, {
       onSuccess: data => {
-        setGameBalance(data.gameBalance)
-        useGameStore.setState({ accumulatedPoints: 0 }) // Reset accumulatedPoints after sending
+        useGameStore.setState({
+          accumulatedPoints: 0,
+        }) // Reset accumulatedPoints after sending
       },
     })
+
+    // sendPointsMutation.mutate(accumulatedPoints, {
+    //   onSuccess: data => {
+    //     setGameBalance(data.gameBalance)
+    //     useGameStore.setState({ accumulatedPoints: 0 }) // Reset accumulatedPoints after sending
+    //   },
+    // })
   }, [accumulatedPoints, sendPointsMutation, setGameBalance])
 
   useEffect(() => {
@@ -105,14 +107,14 @@ function ChannelItem({ channelGame, onNext, onBack }: Props) {
   return (
     <div className={styles.channel}>
       <header className={styles.header}>
-        <h1 className={cn('namePlate', styles.channelName)}>{channelGame.channel.name}</h1>
+        <h1 className={cn('namePlate', styles.channelName)}>{channel.title}</h1>
       </header>
 
       {field && (
         <FieldBoard
           field={field}
-          cover={channelGame.channel.icon_url}
-          damage={settingsData?.damage || 1}
+          cover={channel.avatar}
+          damage={gameSettings.damage || 1}
           onNext={onNext}
           onBoxesRemoved={handleBoxesRemoved}
         />

@@ -11,7 +11,7 @@ import styles from './FieldBoard.module.scss'
 type Props = {
   field: Field
   damage: number
-  cover?: string
+  cover?: string | null;
   onNext?: () => void
   onBoxesRemoved: (removedIds: number[]) => void
 }

@@ -1,0 +1,21 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  fill: #fff;
+}
+
+.small {
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+}
+
+.medium {
+  width: var(--spacing-6);
+  height: var(--spacing-6);
+}
+
+.large {
+  width: var(--spacing-8);
+  height: var(--spacing-8);
+}

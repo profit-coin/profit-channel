@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { PublicChannel } from '@/data/channels';
+import { PublicChannel, InternalGameChannel } from '@/data/channels';
 import styles from './ChannelAvatar.module.scss';
 import classNames from 'classnames';
 
 interface ChannelAvatarProps {
   size?: 'small' | 'medium' | 'large';
-  channel: PublicChannel;
+  channel: PublicChannel | InternalGameChannel;
 }
 
 function ChannelAvatar ({ channel, size = 'medium' }: ChannelAvatarProps) {

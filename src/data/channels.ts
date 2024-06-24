@@ -24,6 +24,12 @@ export interface InternalGameChannel {
   balance: number;
   player: string;
   author: string;
+  title: string;
+  avatar: string | null;
+  cooldown: number;
+  periodLimit: number;
+  leftPeriodLimit: number;
+  lastCooldownResetTime: Date;
 }
 
 export const usePlayerChannels = () => useQuery({
@@ -48,6 +54,15 @@ export const useAddChannelToFavoritesMutation = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['findChannels']});
+      queryClient.invalidateQueries({ queryKey: ['playerChannels']});
     }
   });
 }
+
+export const usePlayerChannel = (channelTelegramId: number) => useQuery({
+  queryKey: ['playerChannel', channelTelegramId],
+  queryFn: async () => {
+    const channel = await get<InternalGameChannel>(`v1/game/channels/${channelTelegramId}`);
+    return channel;
+  }
+});

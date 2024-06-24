@@ -26,15 +26,13 @@ type Props = {
 }
 
 function ChannelLayout({ children, nav, isBlurred = true, contentCenter, isBalanceTransformed }: Props & PropsWithChildren) {
-  const { data: balance } = useUserBalance();
+  const { data: balance, isLoading: isBalanceLoading } = useUserBalance();
 
   return (
     <div className={cn(styles.layout, font.className)}>
       <main className={styles.main}>
         {isBlurred && <div className={styles.blur} />}
-        
-        <Balance balance={balance} isTransformed={isBalanceTransformed} />
-        
+        <Balance balance={balance} isLoading={isBalanceLoading} isTransformed={isBalanceTransformed} />
         <div className={cn(styles.content, { [styles.center]: contentCenter })}>{children}</div>
       </main>
       {nav}
