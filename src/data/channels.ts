@@ -29,7 +29,7 @@ export interface InternalGameChannel {
 export const usePlayerChannels = () => useQuery({
   queryKey: ['playerChannels'],
   queryFn: async () => {
-    const channels = await get<InternalGameChannel[]>('v1/studio/channels/player');
+    const channels = await get<InternalGameChannel[]>('v1/game/channels/player');
     return channels;
   }
 });
@@ -43,7 +43,7 @@ export const useAddChannelToFavoritesMutation = () => {
 
   return useMutation<InternalGameChannel | null, unknown, AddChannelToFavoritesPayload>({
     mutationFn: async (data) => {
-      const channel = await post<InternalGameChannel | null>( `v1/studio/channels/${data.channelTelegramId}/favorite`, {});
+      const channel = await post<InternalGameChannel | null>( `v1/game/channels/${data.channelTelegramId}/favorite`, {});
       return channel;
     },
     onSuccess: () => {
